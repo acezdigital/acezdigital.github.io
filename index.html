@@ -63,13 +63,62 @@
   <!-- SECCIÓN DEL VISOR -->
   <section id="catalogo">
 
-    <iframe
-      class="visor"
-      src="https://v.calameo.com/?bkcode=0081662308d4e657f0924&mode=viewer&view=slide"
-      allowfullscreen>
-    </iframe>
+   <!-- VISOR TIPO REVISTA -->
+<div id="visor" style="max-width:900px; margin:40px auto; text-align:center;">
+  <canvas id="pdf-canvas" style="width:100%; border-radius:12px;"></canvas>
 
-  </section>
+  <div style="margin-top:15px;">
+    <button onclick="prevPage()" class="btn">⬅ Anterior</button>
+    <span id="page-num"></span> / <span id="page-count"></span>
+    <button onclick="nextPage()" class="btn">Siguiente ➡</button>
+  </div>
+</div>
 
-</body>
-</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
+<script>
+const url = "https://acezdigital.github.io/catalogos/SiguaStickers.pdf";
+
+let pdfDoc = null,
+    pageNum = 1,
+    pageRendering = false,
+    canvas = document.getElementById('pdf-canvas'),
+    ctx = canvas.getContext('2d');
+
+pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+  pdfDoc = pdfDoc_;
+  document.getElementById('page-count').textContent = pdfDoc.numPages;
+  renderPage(pageNum);
+});
+
+function renderPage(num) {
+  pageRendering = true;
+  pdfDoc.getPage(num).then(function(page) {
+    let viewport = page.getViewport({scale:1.5});
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    let renderContext = {
+      canvasContext: ctx,
+      viewport: viewport
+    };
+    page.render(renderContext).promise.then(function() {
+      pageRendering = false;
+    });
+
+    document.getElementById('page-num').textContent = num;
+  });
+}
+
+function prevPage() {
+  if (pageNum <= 1) return;
+  pageNum--;
+  renderPage(pageNum);
+}
+
+function nextPage() {
+  if (pageNum >= pdfDoc.numPages) return;
+  pageNum++;
+  renderPage(pageNum);
+}
+</script>
