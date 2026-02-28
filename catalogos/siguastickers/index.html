@@ -4,26 +4,52 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Siguas Stickers - Catálogo</title>
+<title>Siguas Stickers</title>
 
 <style>
+
 body{
     margin:0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
     background:#0f172a;
     color:white;
     text-align:center;
 }
 
-/* HEADER */
-header{
-    padding:15px;
-    background:#020617;
+/* PANTALLAS */
+#inicio, #catalogo{
+    display:none;
 }
 
+#inicio{
+    display:block;
+    padding:20px;
+}
+
+/* LOGO */
 .logo{
-    height:80px;
-    margin-bottom:10px;
+    width:180px;
+    margin:20px auto;
+    display:block;
+}
+
+/* PORTADA */
+.portada{
+    width:90%;
+    max-width:450px;
+    border-radius:12px;
+    margin-top:20px;
+}
+
+/* BOTON */
+.boton{
+    margin-top:25px;
+    padding:15px 25px;
+    font-size:18px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
 }
 
 /* VISOR */
@@ -31,18 +57,17 @@ header{
     display:flex;
     justify-content:center;
     align-items:center;
-    height:78vh;
+    height:80vh;
 }
 
 #revista{
     width:95%;
     max-height:100%;
-    border-radius:12px;
-    box-shadow:0 0 20px rgba(0,0,0,0.6);
+    border-radius:10px;
     object-fit:contain;
 }
 
-/* BOTONES */
+/* CONTROLES */
 .controles{
     margin:10px;
 }
@@ -56,24 +81,41 @@ button{
     color:white;
     font-size:16px;
 }
+
 </style>
 </head>
 
 <body>
 
-<header>
+<!-- ================== INICIO ================== -->
+<div id="inicio">
+
     <img src="logo.sigua.png" class="logo">
+
     <h1>Siguas Stickers</h1>
     <p>Catálogo digital</p>
-</header>
 
-<div id="visor">
-    <img id="revista" src="1.jpg">
+    <img src="1.jpg" class="portada">
+
+    <br>
+    <button class="boton" onclick="abrirCatalogo()">VER CATÁLOGO</button>
+
 </div>
 
-<div class="controles">
-    <button onclick="anterior()">⟵</button>
-    <button onclick="siguiente()">⟶</button>
+<!-- ================== CATALOGO ================== -->
+<div id="catalogo">
+
+    <div id="visor">
+        <img id="revista" src="1.jpg">
+    </div>
+
+    <div class="controles">
+        <button onclick="anterior()">⟵</button>
+        <button onclick="siguiente()">⟶</button>
+    </div>
+
+    <button onclick="volver()">Volver</button>
+
 </div>
 
 <script>
@@ -89,12 +131,26 @@ const paginas = [
 
 let paginaActual = 0;
 
+/* ABRIR CATALOGO */
+function abrirCatalogo(){
+    document.getElementById("inicio").style.display="none";
+    document.getElementById("catalogo").style.display="block";
+}
+
+/* VOLVER */
+function volver(){
+    document.getElementById("catalogo").style.display="none";
+    document.getElementById("inicio").style.display="block";
+}
+
+/* MOSTRAR PAGINA */
 function mostrarPagina(){
     document.getElementById("revista").src = paginas[paginaActual];
 }
 
+/* BOTONES */
 function siguiente(){
-    if(paginaActual < paginas.length - 1){
+    if(paginaActual < paginas.length-1){
         paginaActual++;
         mostrarPagina();
     }
@@ -107,8 +163,8 @@ function anterior(){
     }
 }
 
-/* DESLIZAR CON EL DEDO */
-let startX = 0;
+/* DESLIZAR */
+let startX=0;
 
 document.getElementById("visor").addEventListener("touchstart", function(e){
     startX = e.touches[0].clientX;
@@ -117,11 +173,11 @@ document.getElementById("visor").addEventListener("touchstart", function(e){
 document.getElementById("visor").addEventListener("touchend", function(e){
     let endX = e.changedTouches[0].clientX;
 
-    if(startX > endX + 50){
+    if(startX > endX+50){
         siguiente();
     }
 
-    if(startX < endX - 50){
+    if(startX < endX-50){
         anterior();
     }
 });
