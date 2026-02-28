@@ -1,9 +1,10 @@
-[11:41 a. m., 28/2/2026] augustozelaya25: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catálogo Sigua Stickers</title>
+
+<title>Siguas Stickers - Catálogo</title>
 
 <style>
 body{
@@ -14,90 +15,14 @@ body{
     text-align:center;
 }
 
-header{
-    padding:20px;
-    background:#020617;
-}
-
-header img{
-    height:50px;
-    vertical-align:middle;
-}
-
-h1{
-    margin:10px 0;
-}
-
-#visor{
-    display:flex;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    width:100%;
-    height:90vh;
-}
-
-.page{
-    flex:0 0 100%;
-    scroll-snap-align:center;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.page img{
-    max-width:95%;
-    max-height:95%;
-    border-radius:10px;
-    box-shadow:0 0 15px rgba(0,0,0,0.5);
-}
-</style>
-
-</head>
-
-<body>
-
-<header>
-    <img src="../logo.png">
-    <h1>Sigua Stickers</h1>
-    <p>Catálogo digital</p>
-</header>
-
-<div id="visor">
-
-    <div class="page"><img src="1.jpg"></div>
-    <div class="page"><img src="2.jpg"></div>
-    <div class="page"><img src="3.jpg"></div>
-    <div class="page"><img src="4.jpg"></div>
-    <div class="page"><img src="5.jpg"></div>
-
-</div>
-
-</body>
-</html>
-[12:07 p. m., 28/2/2026] augustozelaya25: <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catálogo Sigua Stickers</title>
-
-<style>
-body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background:#0f172a;
-    color:white;
-    text-align:center;
-}
-
-/* ENCABEZADO */
+/* HEADER */
 header{
     padding:20px;
     background:#020617;
 }
 
 .logo{
-    height:60px;
+    height:70px;
     display:block;
     margin:0 auto 10px;
 }
@@ -111,11 +36,11 @@ h1{
     display:flex;
     justify-content:center;
     align-items:center;
-    height:80vh;
+    height:75vh;
 }
 
 #revista{
-    max-width:90%;
+    max-width:92%;
     max-height:100%;
     border-radius:12px;
     box-shadow:0 0 20px rgba(0,0,0,0.5);
@@ -146,12 +71,13 @@ button:hover{
 <body>
 
 <header>
-    <img src="ACEZdigital.png" class="logo">
-    <h1>Catálogo Sigua Stickers</h1>
+    <img src="logo.sigua.png" class="logo">
+    <h1>Siguas Stickers</h1>
+    <p>Catálogo digital</p>
 </header>
 
 <div id="visor">
-    <img id="revista" src="1Portada.jpg">
+    <img id="revista" src="1.jpg">
 </div>
 
 <div class="controles">
@@ -161,24 +87,21 @@ button:hover{
 
 <script>
 
-/* LISTA DE PÁGINAS */
 const paginas = [
-  "1Portada.jpg",
-  "2Pronto.jpg",
-  "3Personalizar.jpg",
-  "4StickMotos.jpg",
-  "5GirlsInside.jpg",
-  "6Lopegamos.jpg"
+  "1.jpg",
+  "2.jpg",
+  "3.jpg",
+  "4.jpg",
+  "5.jpg",
+  "6.jpg"
 ];
 
 let paginaActual = 0;
 
-/* MOSTRAR PÁGINA */
 function mostrarPagina(){
     document.getElementById("revista").src = paginas[paginaActual];
 }
 
-/* SIGUIENTE */
 function siguiente(){
     if(paginaActual < paginas.length - 1){
         paginaActual++;
@@ -186,7 +109,6 @@ function siguiente(){
     }
 }
 
-/* ANTERIOR */
 function anterior(){
     if(paginaActual > 0){
         paginaActual--;
