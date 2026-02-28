@@ -3,131 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sigua Sticker | ACEZ Digital</title>
+
+<title>Siguas Stickers</title>
 
 <style>
 
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Arial, Helvetica, sans-serif;overflow:hidden;color:#fff;}
-
-/* WRAPPER HORIZONTAL */
-.wrapper{
-display:flex;
-width:100vw;
-height:100vh;
-overflow-x:scroll;
-scroll-snap-type:x mandatory;
-scroll-behavior:smooth;
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:white;
+    text-align:center;
 }
 
-/* PÁGINAS */
-.page{
-min-width:100vw;
-height:100vh;
-scroll-snap-align:start;
-padding:60px 18px 18px 18px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
+/* PANTALLAS */
+#inicio, #catalogo{
+    display:none;
 }
 
-/* FONDOS */
-.home{background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);}
-.catalogo{background:linear-gradient(120deg,#1e3c72,#2a5298);}
-.galeria{background:linear-gradient(120deg,#42275a,#734b6d);}
-.servicios{background:linear-gradient(120deg,#134E5E,#71B280);}
-.contacto{background:linear-gradient(120deg,#000428,#004e92);}
-
-/* HEADER */
-.brand-bar{
-position:fixed;top:0;left:0;width:100%;
-display:flex;justify-content:space-between;align-items:center;
-padding:6px 12px;
-background:rgba(0,0,0,.35);
-backdrop-filter:blur(6px);
-font-size:12px;
-z-index:1000;
+#inicio{
+    display:block;
+    padding:20px;
 }
 
-.brand-left{display:flex;align-items:center;gap:6px;}
-.brand-logo{width:26px;height:26px;}
-.brand-name{font-weight:600;}
-.brand-main{font-size:13px;margin-left:6px;}
-
-.phone{opacity:.8}
-
-/* WHATSAPP */
-.whatsapp-top{
-position:fixed;
-top:6px;right:10px;
-background:#25D366;
-padding:6px 10px;
-border-radius:20px;
-font-size:12px;
-text-decoration:none;
-color:#fff;
-z-index:1100;
+/* LOGO */
+.logo{
+    width:180px;
+    margin:20px auto;
+    display:block;
 }
 
-/* TEXTO */
-.center{text-align:center}
-h1{font-size:22px;margin:6px 0}
-h2{font-size:18px;margin:4px 0}
-p{font-size:13px;opacity:.9}
-
-/* BOTONES */
-.btn{
-padding:9px 14px;
-border-radius:8px;
-border:none;
-background:#fff;
-color:#000;
-font-weight:600;
-cursor:pointer;
+/* PORTADA */
+.portada{
+    width:90%;
+    max-width:450px;
+    border-radius:12px;
+    margin-top:20px;
 }
 
-.btn.alt{
-background:rgba(255,255,255,.2);
-color:#fff;
+/* BOTON */
+.boton{
+    margin-top:25px;
+    padding:15px 25px;
+    font-size:18px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:10px;
 }
 
-.bottom{display:flex;justify-content:center;gap:10px}
-
-/* CARDS */
-.cards{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
-margin-top:10px;
+/* VISOR */
+#visor{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:80vh;
 }
 
-.card{
-padding:10px;
-background:rgba(255,255,255,.12);
-border-radius:10px;
-text-align:center;
+#revista{
+    width:95%;
+    max-height:100%;
+    border-radius:10px;
+    object-fit:contain;
 }
 
-/* GALERÍA */
-.gallery{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:8px;
+/* CONTROLES */
+.controles{
+    margin:10px;
 }
 
-.gallery img{
-width:100%;
-border-radius:10px;
-object-fit:cover;
-}
-
-/* CONTACTO */
-.contact-box{
-text-align:center;
-background:rgba(255,255,255,.1);
-padding:12px;
-border-radius:10px;
+button{
+    padding:10px 20px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
 }
 
 </style>
@@ -135,106 +87,101 @@ border-radius:10px;
 
 <body>
 
-<!-- HEADER -->
-<div class="brand-bar">
-<div class="brand-left">
-<img src="assets/img/AcesDigital.png" class="brand-logo">
-<span class="brand-name">ACES Digital</span>
-<span class="brand-main">| Sigua Stickers</span>
-</div>
-<div class="phone">+504 3366-1836</div>
+<!-- ================== INICIO ================== -->
+<div id="inicio">
+
+    <img src="logo.sigua.png" class="logo">
+
+    <h1>Siguas Stickers</h1>
+    <p>Catálogo digital</p>
+
+    <img src="1.jpg" class="portada">
+
+    <br>
+    <button class="boton" onclick="abrirCatalogo()">VER CATÁLOGO</button>
+
 </div>
 
-<a href="https://wa.me/50433661836" class="whatsapp-top">WhatsApp</a>
+<!-- ================== CATALOGO ================== -->
+<div id="catalogo">
 
-<div class="wrapper" id="wrapper">
+    <div id="visor">
+        <img id="revista" src="1.jpg">
+    </div>
 
-<!-- PÁGINA 1 -->
-<section class="page home">
-<div class="center">
-<h1>Sigua Sticker</h1>
-<p>Stickers • Vinil • Impresiones • Publicidad</p>
-<p>Transformamos tu marca en imagen</p>
-</div>
-<div class="bottom">
-<button class="btn" onclick="go(1)">Ver Catálogo</button>
-</div>
-</section>
+    <div class="controles">
+        <button onclick="anterior()">⟵</button>
+        <button onclick="siguiente()">⟶</button>
+    </div>
 
-<!-- PÁGINA 2 -->
-<section class="page catalogo">
-<div>
-<h2>Productos</h2>
-<div class="cards">
-<div class="card">Stickers personalizados</div>
-<div class="card">Vinil adhesivo</div>
-<div class="card">Banners</div>
-<div class="card">Etiquetas</div>
-<div class="card">Rotulación</div>
-<div class="card">Cortes especiales</div>
-</div>
-</div>
-<div class="bottom">
-<button class="btn alt" onclick="go(0)">Volver</button>
-<button class="btn" onclick="go(2)">Ver trabajos</button>
-</div>
-</section>
-
-<!-- PÁGINA 3 GALERÍA -->
-<section class="page galeria">
-<div>
-<h2>Trabajos Realizados</h2>
-<div class="gallery">
-<img src="assets/img/gal1.jpg">
-<img src="assets/img/gal2.jpg">
-<img src="assets/img/gal3.jpg">
-<img src="assets/img/gal4.jpg">
-</div>
-</div>
-<div class="bottom">
-<button class="btn alt" onclick="go(1)">Volver</button>
-<button class="btn" onclick="go(4)">Contactar</button>
-</div>
-</section>
-
-<!-- PÁGINA 4 SERVICIOS -->
-<section class="page servicios">
-<div>
-<h2>Servicios ACES Digital</h2>
-<div class="cards">
-<div class="card">Diseño gráfico</div>
-<div class="card">Publicidad digital</div>
-<div class="card">Edición de video</div>
-<div class="card">Branding</div>
-</div>
-</div>
-<div class="bottom">
-<button class="btn alt" onclick="go(2)">Volver</button>
-<button class="btn" onclick="go(4)">Contacto</button>
-</div>
-</section>
-
-<!-- PÁGINA 5 CONTACTO -->
-<section class="page contacto">
-<div class="contact-box">
-<h2>Contáctanos</h2>
-<p>Sigua Sticker</p>
-<p>Tel: +504 3366-1836</p>
-<p>WhatsApp disponible</p>
-</div>
-<div class="bottom">
-<button class="btn alt" onclick="go(0)">Inicio</button>
-<a href="https://wa.me/50433661836" class="btn">Escribir por WhatsApp</a>
-</div>
-</section>
+    <button onclick="volver()">Volver</button>
 
 </div>
 
 <script>
-function go(i){
-const w=document.getElementById("wrapper");
-w.scrollTo({left:window.innerWidth*i,behavior:"smooth"});
+
+const paginas = [
+ "1.jpg",
+ "2.jpg",
+ "3.jpg",
+ "4.jpg",
+ "5.jpg",
+ "6.jpg"
+];
+
+let paginaActual = 0;
+
+/* ABRIR CATALOGO */
+function abrirCatalogo(){
+    document.getElementById("inicio").style.display="none";
+    document.getElementById("catalogo").style.display="block";
 }
+
+/* VOLVER */
+function volver(){
+    document.getElementById("catalogo").style.display="none";
+    document.getElementById("inicio").style.display="block";
+}
+
+/* MOSTRAR PAGINA */
+function mostrarPagina(){
+    document.getElementById("revista").src = paginas[paginaActual];
+}
+
+/* BOTONES */
+function siguiente(){
+    if(paginaActual < paginas.length-1){
+        paginaActual++;
+        mostrarPagina();
+    }
+}
+
+function anterior(){
+    if(paginaActual > 0){
+        paginaActual--;
+        mostrarPagina();
+    }
+}
+
+/* DESLIZAR */
+let startX=0;
+
+document.getElementById("visor").addEventListener("touchstart", function(e){
+    startX = e.touches[0].clientX;
+});
+
+document.getElementById("visor").addEventListener("touchend", function(e){
+    let endX = e.changedTouches[0].clientX;
+
+    if(startX > endX+50){
+        siguiente();
+    }
+
+    if(startX < endX-50){
+        anterior();
+    }
+});
+
 </script>
 
 </body>
