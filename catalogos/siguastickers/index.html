@@ -17,18 +17,13 @@ body{
 
 /* HEADER */
 header{
-    padding:20px;
+    padding:15px;
     background:#020617;
 }
 
 .logo{
-    height:70px;
-    display:block;
-    margin:0 auto 10px;
-}
-
-h1{
-    margin:5px;
+    height:80px;
+    margin-bottom:10px;
 }
 
 /* VISOR */
@@ -36,19 +31,20 @@ h1{
     display:flex;
     justify-content:center;
     align-items:center;
-    height:75vh;
+    height:78vh;
 }
 
 #revista{
-    max-width:92%;
+    width:95%;
     max-height:100%;
     border-radius:12px;
-    box-shadow:0 0 20px rgba(0,0,0,0.5);
+    box-shadow:0 0 20px rgba(0,0,0,0.6);
+    object-fit:contain;
 }
 
 /* BOTONES */
 .controles{
-    margin:20px;
+    margin:10px;
 }
 
 button{
@@ -59,11 +55,6 @@ button{
     background:#2563eb;
     color:white;
     font-size:16px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#1d4ed8;
 }
 </style>
 </head>
@@ -81,19 +72,19 @@ button:hover{
 </div>
 
 <div class="controles">
-    <button onclick="anterior()">⟵ Anterior</button>
-    <button onclick="siguiente()">Siguiente ⟶</button>
+    <button onclick="anterior()">⟵</button>
+    <button onclick="siguiente()">⟶</button>
 </div>
 
 <script>
 
 const paginas = [
-  "1.jpg",
-  "2.jpg",
-  "3.jpg",
-  "4.jpg",
-  "5.jpg",
-  "6.jpg"
+ "1.jpg",
+ "2.jpg",
+ "3.jpg",
+ "4.jpg",
+ "5.jpg",
+ "6.jpg"
 ];
 
 let paginaActual = 0;
@@ -115,6 +106,25 @@ function anterior(){
         mostrarPagina();
     }
 }
+
+/* DESLIZAR CON EL DEDO */
+let startX = 0;
+
+document.getElementById("visor").addEventListener("touchstart", function(e){
+    startX = e.touches[0].clientX;
+});
+
+document.getElementById("visor").addEventListener("touchend", function(e){
+    let endX = e.changedTouches[0].clientX;
+
+    if(startX > endX + 50){
+        siguiente();
+    }
+
+    if(startX < endX - 50){
+        anterior();
+    }
+});
 
 </script>
 
