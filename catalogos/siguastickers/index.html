@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Siguas Stickers</title>
+<title>Sigua Stickers</title>
 
 <style>
 
@@ -23,63 +22,123 @@ body{
 
 #inicio{
     display:block;
-    padding:20px;
 }
 
-/* LOGO */
-.logo{
-    width:180px;
-    margin:20px auto;
-    display:block;
+/* ===== BARRA SUPERIOR FIJA ===== */
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#2f2f2f;
+    padding:6px 10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:13px;
+    z-index:1000;
+    border-bottom:2px solid yellow;
 }
 
-/* PORTADA */
-.portada{
-    width:90%;
+.header-text{
+    text-align:left;
+}
+
+.header-text b{
+    font-size:15px;
+}
+
+.whatsapp-btn{
+    background:#25D366;
+    color:white;
+    padding:6px 10px;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:12px;
+}
+
+/* ===== BARRA INFERIOR ===== */
+.footer{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#2f2f2f;
+    padding:6px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-top:2px solid yellow;
+    font-size:11px;
+}
+
+.footer img{
+    height:28px;
+}
+
+.footer-text{
+    flex:1;
+    padding:0 6px;
+}
+
+.footer a{
+    background:#25D366;
+    padding:6px 10px;
+    border-radius:20px;
+    text-decoration:none;
+    color:white;
+    font-size:12px;
+}
+
+/* CONTENIDO */
+.contenido{
+    padding-top:60px;
+    padding-bottom:60px;
+}
+
+/* IMÁGENES */
+.portada, #revista{
+    width:95%;
     max-width:450px;
     border-radius:12px;
-    margin-top:20px;
 }
 
-/* BOTON */
+/* BOTÓN */
 .boton{
-    margin-top:25px;
-    padding:15px 25px;
-    font-size:18px;
-    background:#2563eb;
-    color:white;
+    margin-top:20px;
+    padding:14px 25px;
+    background:#16a34a;
     border:none;
     border-radius:10px;
+    font-size:18px;
+    color:white;
 }
 
 /* VISOR */
 #visor{
+    height:70vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:80vh;
-}
-
-#revista{
-    width:95%;
-    max-height:100%;
-    border-radius:10px;
-    object-fit:contain;
 }
 
 /* CONTROLES */
 .controles{
-    margin:10px;
+    margin-top:5px;
 }
 
 button{
-    padding:10px 20px;
+    padding:8px 15px;
     margin:5px;
     border:none;
     border-radius:8px;
     background:#2563eb;
     color:white;
-    font-size:16px;
+}
+
+/* TRANSICIÓN */
+#revista{
+    transition:opacity .4s;
 }
 
 </style>
@@ -87,23 +146,37 @@ button{
 
 <body>
 
-<!-- ================== INICIO ================== -->
-<div id="inicio">
+<!-- BARRA SUPERIOR -->
+<div class="header">
+    <div class="header-text">
+        <b>SIGUA STICKERS</b><br>
+        Nuestra calidad es tu garantía
+    </div>
 
-    <img src="logo.sigua.png" class="logo">
+    <a href="https://wa.me/50496850561" class="whatsapp-btn">WhatsApp</a>
+</div>
 
-    <h1>Siguas Stickers</h1>
-    <p>Catálogo digital</p>
+<!-- BARRA INFERIOR -->
+<div class="footer">
+    <img src="logo-aces.png">
+    <div class="footer-text">
+        Catálogo diseñado por ACES Digital
+    </div>
+    <a href="https://wa.me/50496850561">WhatsApp</a>
+</div>
+
+<!-- ===== INICIO FIJO ===== -->
+<div id="inicio" class="contenido">
 
     <img src="1.jpg" class="portada">
 
     <br>
-    <button class="boton" onclick="abrirCatalogo()">VER CATÁLOGO</button>
+    <button class="boton" onclick="abrirCatalogo()">Ver catálogo</button>
 
 </div>
 
-<!-- ================== CATALOGO ================== -->
-<div id="catalogo">
+<!-- ===== CATÁLOGO ===== -->
+<div id="catalogo" class="contenido">
 
     <div id="visor">
         <img id="revista" src="1.jpg">
@@ -130,56 +203,67 @@ const paginas = [
 ];
 
 let paginaActual = 0;
+let auto = null;
 
-/* ABRIR CATALOGO */
+/* ABRIR */
 function abrirCatalogo(){
     document.getElementById("inicio").style.display="none";
     document.getElementById("catalogo").style.display="block";
+    iniciarAuto();
 }
 
 /* VOLVER */
 function volver(){
     document.getElementById("catalogo").style.display="none";
     document.getElementById("inicio").style.display="block";
+    detenerAuto();
 }
 
-/* MOSTRAR PAGINA */
-function mostrarPagina(){
-    document.getElementById("revista").src = paginas[paginaActual];
+/* MOSTRAR */
+function mostrar(){
+    let img=document.getElementById("revista");
+    img.style.opacity=0;
+    setTimeout(()=>{
+        img.src=paginas[paginaActual];
+        img.style.opacity=1;
+    },200);
 }
 
-/* BOTONES */
+/* SIGUIENTE */
 function siguiente(){
-    if(paginaActual < paginas.length-1){
-        paginaActual++;
-        mostrarPagina();
-    }
+    paginaActual=(paginaActual+1)%paginas.length;
+    mostrar();
 }
 
+/* ANTERIOR */
 function anterior(){
-    if(paginaActual > 0){
-        paginaActual--;
-        mostrarPagina();
-    }
+    paginaActual=(paginaActual-1+paginas.length)%paginas.length;
+    mostrar();
 }
 
-/* DESLIZAR */
-let startX=0;
+/* AUTO */
+function iniciarAuto(){
+    auto=setInterval(()=>{siguiente();},3000);
+}
 
-document.getElementById("visor").addEventListener("touchstart", function(e){
-    startX = e.touches[0].clientX;
+function detenerAuto(){
+    clearInterval(auto);
+}
+
+/* SWIPE */
+let startX=0;
+document.getElementById("visor").addEventListener("touchstart",e=>{
+    startX=e.touches[0].clientX;
+    detenerAuto();
 });
 
-document.getElementById("visor").addEventListener("touchend", function(e){
-    let endX = e.changedTouches[0].clientX;
+document.getElementById("visor").addEventListener("touchend",e=>{
+    let endX=e.changedTouches[0].clientX;
 
-    if(startX > endX+50){
-        siguiente();
-    }
+    if(startX>endX+50) siguiente();
+    if(startX<endX-50) anterior();
 
-    if(startX < endX-50){
-        anterior();
-    }
+    iniciarAuto();
 });
 
 </script>
