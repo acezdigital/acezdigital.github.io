@@ -1,88 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACEZ Digital</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACES Digital</title>
 
-<style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: white;
-  text-align: center;
-}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      text-align: center;
+    }
 
-header {
-  padding: 20px 15px;
-}
+    header {
+      padding: 60px 20px 40px;
+    }
 
-h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
-}
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
 
-p {
-  font-size: 16px;
-  opacity: 0.9;
-}
+    p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
 
-.btn {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 12px 25px;
-  background: #22c55e;
-  color: white;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-}
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 14px 30px;
+      background: #22c55e;
+      color: white;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-.contenedor-visor {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
+    .visor {
+      margin-top: 40px;
+      width: 95%;
+      max-width: 900px;
+      height: 800px;
+      border: none;
+      border-radius: 15px;
+    }
 
-iframe {
-  width: 100%;
-  max-width: 1000px;
-  height: 650px;
-  border: none;
-  border-radius: 15px;
-}
-
-footer {
-  margin: 30px 10px;
-  font-size: 14px;
-  opacity: 0.7;
-}
-</style>
-
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Impulsamos tu negocio al mundo digital</h1>
-  <p>Diseños web, marketing, anuncios y presencia online para emprendedores</p>
+  <header>
+    <h1>Impulsamos tu negocio al mundo digital</h1>
+    <p>Diseños web, marketing, anuncios y presencia online para emprendedores</p>
 
-  <a href="#catalogo" class="btn">Ver catálogo</a>
-</header>
+    <a class="btn" href="#catalogo">Ver catálogo</a>
+  </header>
 
-<!-- VISOR DE CALAMEO -->
-<div id="catalogo" class="contenedor-visor">
-  <iframe
-    src="https://v.calameo.com/?bkcode=0081662308d4e657f0924"
-    scrolling="no"
-    allowfullscreen>
-  </iframe>
-</div>
+  <!-- SECCIÓN DEL VISOR -->
+  <section id="catalogo">
 
-<footer>
-  © ACES Digital — Siguatepeque, Honduras
-</footer>
+    <iframe
+      class="visor"
+      src="https://v.calameo.com/?bkcode=0081662308d4e657f0924&mode=viewer&view=slide"
+      allowfullscreen>
+    </iframe>
+
+  </section>
 
 </body>
 </html>
