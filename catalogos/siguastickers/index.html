@@ -3,20 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Sigua Stickers</title>
 
 <style>
 
 body{
-<header>
-
-    <img src="logosigua.png" class="logo">
-
-    <h1>Sigua Stickers</h1>
-    <p>Catálogo digital</p>
-
-</header>    
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
     background:#0f172a;
@@ -28,17 +19,9 @@ body{
 #inicio, #catalogo{
     display:none;
 }
-
 #inicio{
     display:block;
-    padding:20px;
-}
-
-/* LOGO */
-.logo{
-    width:180px;
-    margin:20px auto;
-    display:block;
+    padding:30px;
 }
 
 /* PORTADA */
@@ -58,38 +41,37 @@ body{
     color:white;
     border:none;
     border-radius:10px;
+    cursor:pointer;
 }
 
-/* VISOR */
-#visor{
+/* REVISTA */
+.revista{
     display:flex;
-    justify-content:center;
-    align-items:center;
-    height:80vh;
-    overflow:hidden;
-    touch-action: pan-y;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling: touch;
 }
 
-#revista{
-    width:95%;
-    max-height:100%;
-    border-radius:10px;
+.revista img{
+    width:100%;
+    height:100vh;
     object-fit:contain;
+    scroll-snap-align:center;
+    flex-shrink:0;
 }
 
-/* CONTROLES */
-.controles{
-    margin:10px;
+/* FOOTER */
+footer{
+    background:#020617;
+    padding:20px;
+    font-size:14px;
+    margin-top:20px;
 }
 
-button{
-    padding:10px 20px;
-    margin:5px;
-    border:none;
-    border-radius:8px;
-    background:#2563eb;
-    color:white;
-    font-size:16px;
+footer a{
+    color:#38bdf8;
+    text-decoration:none;
+    font-weight:bold;
 }
 
 </style>
@@ -97,101 +79,44 @@ button{
 
 <body>
 
-<!-- ================== INICIO ================== -->
-<div id="inicio">
-
-    <img src="logo.sigua.png" class="logo">
-
-    <h1>Siguas Stickers</h1>
+<!-- INICIO -->
+<section id="inicio">
+    <h1>Sigua Stickers</h1>
     <p>Catálogo digital</p>
 
     <img src="1.jpg" class="portada">
 
     <br>
-    <button class="boton" onclick="abrirCatalogo()">VER CATÁLOGO</button>
+    <button class="boton" onclick="mostrarCatalogo()">Ver catálogo</button>
+</section>
 
-</div>
-
-<!-- ================== CATALOGO ================== -->
-<div id="catalogo">
-
-    <div id="visor">
-        <img id="revista" src="1.jpg">
+<!-- CATALOGO -->
+<section id="catalogo">
+    <div class="revista">
+        <img src="1.jpg">
+        <img src="2.jpg">
+        <img src="3.jpg">
+        <img src="4.jpg">
+        <img src="5.jpg">
+        <img src="6.jpg">
     </div>
 
-    <div class="controles">
-        <button onclick="anterior()">⟵</button>
-        <button onclick="siguiente()">⟶</button>
-    </div>
-
-    <button onclick="volver()">Volver</button>
-
-</div>
+    <!-- FOOTER COMERCIAL -->
+    <footer>
+        <p>¿Quieres un catálogo digital como este?</p>
+        <p>Diseñado por <strong>AC Digital</strong></p>
+        <p>
+            📲 <a href="https://wa.me/50433661836">Escríbeme por WhatsApp</a><br>
+            ☎️ <a href="tel:+50400000000">Llamar ahora</a>
+        </p>
+    </footer>
+</section>
 
 <script>
-
-const paginas = [
- "1.jpg",
- "2.jpg",
- "3.jpg",
- "4.jpg",
- "5.jpg",
- "6.jpg"
-];
-
-let paginaActual = 0;
-
-/* ABRIR CATALOGO */
-function abrirCatalogo(){
+function mostrarCatalogo(){
     document.getElementById("inicio").style.display="none";
     document.getElementById("catalogo").style.display="block";
 }
-
-/* VOLVER */
-function volver(){
-    document.getElementById("catalogo").style.display="none";
-    document.getElementById("inicio").style.display="block";
-}
-
-/* MOSTRAR PAGINA */
-function mostrarPagina(){
-    document.getElementById("revista").src = paginas[paginaActual];
-}
-
-/* BOTONES */
-function siguiente(){
-    if(paginaActual < paginas.length-1){
-        paginaActual++;
-        mostrarPagina();
-    }
-}
-
-function anterior(){
-    if(paginaActual > 0){
-        paginaActual--;
-        mostrarPagina();
-    }
-}
-
-/* DESLIZAR */
-let startX=0;
-
-document.getElementById("visor").addEventListener("touchstart", function(e){
-    startX = e.touches[0].clientX;
-});
-
-document.getElementById("visor").addEventListener("touchend", function(e){
-    let endX = e.changedTouches[0].clientX;
-
-    if(startX > endX+50){
-        siguiente();
-    }
-
-    if(startX < endX-50){
-        anterior();
-    }
-});
-
 </script>
 
 </body>
