@@ -1,261 +1,241 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ACES Digital</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sigua Sticker | ACEZ Digital</title>
 
-  <style>
-    /* ====== RESET ====== */
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+<style>
 
-    body{
-      font-family: Arial, Helvetica, sans-serif;
-      overflow: hidden; /* SIN scroll vertical */
-      background:#0f2027;
-      color:#fff;
-    }
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:Arial, Helvetica, sans-serif;overflow:hidden;color:#fff;}
 
-    /* ====== CONTENEDOR HORIZONTAL ====== */
-    .wrapper{
-      display:flex;
-      flex-direction:row;
-      width:100vw;
-      height:100vh;
-      overflow-x:scroll;
-      overflow-y:hidden;
-      scroll-snap-type:x mandatory;
-      scroll-behavior:smooth;
-    }
+/* WRAPPER HORIZONTAL */
+.wrapper{
+display:flex;
+width:100vw;
+height:100vh;
+overflow-x:scroll;
+scroll-snap-type:x mandatory;
+scroll-behavior:smooth;
+}
 
-    /* ====== CADA PÁGINA ====== */
-    .page{
-      min-width:100vw;
-      height:100vh;
-      scroll-snap-align:start;
-      padding:60px 18px 18px 18px; /* espacio superior para header */
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      position:relative;
-    }
+/* PÁGINAS */
+.page{
+min-width:100vw;
+height:100vh;
+scroll-snap-align:start;
+padding:60px 18px 18px 18px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
 
-    /* ====== FONDOS ====== */
-    .home{
-      background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
-    }
+/* FONDOS */
+.home{background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);}
+.catalogo{background:linear-gradient(120deg,#1e3c72,#2a5298);}
+.galeria{background:linear-gradient(120deg,#42275a,#734b6d);}
+.servicios{background:linear-gradient(120deg,#134E5E,#71B280);}
+.contacto{background:linear-gradient(120deg,#000428,#004e92);}
 
-    .catalogo{
-      background:linear-gradient(120deg,#1e3c72,#2a5298);
-    }
+/* HEADER */
+.brand-bar{
+position:fixed;top:0;left:0;width:100%;
+display:flex;justify-content:space-between;align-items:center;
+padding:6px 12px;
+background:rgba(0,0,0,.35);
+backdrop-filter:blur(6px);
+font-size:12px;
+z-index:1000;
+}
 
-    /* ====== HEADER FIJO ====== */
-    .brand-bar{
-      position:fixed;
-      top:0;
-      left:0;
-      width:100%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:6px 12px;
-      background:rgba(0,0,0,0.35);
-      backdrop-filter: blur(6px);
-      font-size:12.5px;
-      z-index:1000;
-    }
+.brand-left{display:flex;align-items:center;gap:6px;}
+.brand-logo{width:26px;height:26px;}
+.brand-name{font-weight:600;}
+.brand-main{font-size:13px;margin-left:6px;}
 
-    .brand-left{
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
+.phone{opacity:.8}
 
-    .brand-logo{
-      width:26px;
-      height:26px;
-      object-fit:contain;
-    }
+/* WHATSAPP */
+.whatsapp-top{
+position:fixed;
+top:6px;right:10px;
+background:#25D366;
+padding:6px 10px;
+border-radius:20px;
+font-size:12px;
+text-decoration:none;
+color:#fff;
+z-index:1100;
+}
 
-    .brand-name{
-      font-weight:600;
-      letter-spacing:.4px;
-    }
+/* TEXTO */
+.center{text-align:center}
+h1{font-size:22px;margin:6px 0}
+h2{font-size:18px;margin:4px 0}
+p{font-size:13px;opacity:.9}
 
-    .brand-right{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-size:12px;
-    }
+/* BOTONES */
+.btn{
+padding:9px 14px;
+border-radius:8px;
+border:none;
+background:#fff;
+color:#000;
+font-weight:600;
+cursor:pointer;
+}
 
-    .phone{
-      opacity:.8;
-    }
+.btn.alt{
+background:rgba(255,255,255,.2);
+color:#fff;
+}
 
-    /* ====== WHATSAPP FLOTANTE ARRIBA ====== */
-    .whatsapp-top{
-      position:fixed;
-      top:8px;
-      right:12px;
-      background:#25D366;
-      color:#fff;
-      padding:6px 10px;
-      border-radius:20px;
-      font-size:12px;
-      text-decoration:none;
-      font-weight:600;
-      box-shadow:0 2px 6px rgba(0,0,0,.25);
-      z-index:1100;
-    }
+.bottom{display:flex;justify-content:center;gap:10px}
 
-    /* ====== CONTENIDO ====== */
-    .center{
-      text-align:center;
-      padding:6px 0;
-    }
+/* CARDS */
+.cards{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+margin-top:10px;
+}
 
-    h1{
-      font-size:22px;
-      margin:6px 0;
-    }
+.card{
+padding:10px;
+background:rgba(255,255,255,.12);
+border-radius:10px;
+text-align:center;
+}
 
-    h2{
-      font-size:18px;
-      margin:4px 0;
-    }
+/* GALERÍA */
+.gallery{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:8px;
+}
 
-    p{
-      font-size:13px;
-      opacity:.9;
-    }
+.gallery img{
+width:100%;
+border-radius:10px;
+object-fit:cover;
+}
 
-    /* ====== BOTONES ====== */
-    .btn{
-      padding:9px 14px;
-      font-size:13px;
-      border:none;
-      border-radius:8px;
-      background:#ffffff;
-      color:#000;
-      cursor:pointer;
-      font-weight:600;
-    }
+/* CONTACTO */
+.contact-box{
+text-align:center;
+background:rgba(255,255,255,.1);
+padding:12px;
+border-radius:10px;
+}
 
-    .btn.alt{
-      background:rgba(255,255,255,.2);
-      color:#fff;
-    }
-
-    .bottom{
-      display:flex;
-      justify-content:center;
-      gap:10px;
-    }
-
-    /* ====== GRID CATÁLOGO ====== */
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:8px;
-      margin-top:10px;
-    }
-
-    .card{
-      padding:10px;
-      border-radius:10px;
-      background:rgba(255,255,255,0.12);
-      text-align:center;
-      font-size:13px;
-      backdrop-filter: blur(4px);
-    }
-
-    /* ====== INDICADOR DE PÁGINAS ====== */
-    .dots{
-      position:fixed;
-      bottom:8px;
-      width:100%;
-      text-align:center;
-      font-size:18px;
-      opacity:.6;
-    }
-  </style>
+</style>
 </head>
 
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <div class="brand-bar">
-    <div class="brand-left">
-      <img src="assets/img/AcesDigital.png" class="brand-logo">
-      <span class="brand-name">ACES Digital</span>
-    </div>
-    <div class="brand-right">
-      <span class="phone">+504 3366-1836</span>
-    </div>
-  </div>
+<!-- HEADER -->
+<div class="brand-bar">
+<div class="brand-left">
+<img src="assets/img/AcesDigital.png" class="brand-logo">
+<span class="brand-name">ACES Digital</span>
+<span class="brand-main">| Sigua Stickers</span>
+</div>
+<div class="phone">+504 3366-1836</div>
+</div>
 
-  <!-- ===== WHATSAPP ===== -->
-  <a href="https://wa.me/50433661836" class="whatsapp-top" target="_blank">
-    WhatsApp
-  </a>
+<a href="https://wa.me/50433661836" class="whatsapp-top">WhatsApp</a>
 
-  <!-- ===== CONTENEDOR ===== -->
-  <div class="wrapper" id="wrapper">
+<div class="wrapper" id="wrapper">
 
-    <!-- ===== PÁGINA 1 ===== -->
-    <section class="page home">
-      <div class="center">
-        <h1>Impulsamos tu negocio en línea</h1>
-        <p>Diseño • Publicidad • Branding • Marketing</p>
-      </div>
+<!-- PÁGINA 1 -->
+<section class="page home">
+<div class="center">
+<h1>Sigua Sticker</h1>
+<p>Stickers • Vinil • Impresiones • Publicidad</p>
+<p>Transformamos tu marca en imagen</p>
+</div>
+<div class="bottom">
+<button class="btn" onclick="go(1)">Ver Catálogo</button>
+</div>
+</section>
 
-      <div class="bottom">
-        <button class="btn" onclick="irPagina(1)">Ver Catálogo</button>
-      </div>
-    </section>
+<!-- PÁGINA 2 -->
+<section class="page catalogo">
+<div>
+<h2>Productos</h2>
+<div class="cards">
+<div class="card">Stickers personalizados</div>
+<div class="card">Vinil adhesivo</div>
+<div class="card">Banners</div>
+<div class="card">Etiquetas</div>
+<div class="card">Rotulación</div>
+<div class="card">Cortes especiales</div>
+</div>
+</div>
+<div class="bottom">
+<button class="btn alt" onclick="go(0)">Volver</button>
+<button class="btn" onclick="go(2)">Ver trabajos</button>
+</div>
+</section>
 
-    <!-- ===== PÁGINA 2 ===== -->
-    <section class="page catalogo">
-      <div>
-        <h2>Catálogo de Servicios</h2>
+<!-- PÁGINA 3 GALERÍA -->
+<section class="page galeria">
+<div>
+<h2>Trabajos Realizados</h2>
+<div class="gallery">
+<img src="assets/img/gal1.jpg">
+<img src="assets/img/gal2.jpg">
+<img src="assets/img/gal3.jpg">
+<img src="assets/img/gal4.jpg">
+</div>
+</div>
+<div class="bottom">
+<button class="btn alt" onclick="go(1)">Volver</button>
+<button class="btn" onclick="go(4)">Contactar</button>
+</div>
+</section>
 
-        <div class="cards">
-          <div class="card">Diseño gráfico</div>
-          <div class="card">Publicidad digital</div>
-          <div class="card">Edición de video</div>
-          <div class="card">Branding</div>
-          <div class="card">Impresiones</div>
-          <div class="card">Redes sociales</div>
-        </div>
-      </div>
+<!-- PÁGINA 4 SERVICIOS -->
+<section class="page servicios">
+<div>
+<h2>Servicios ACES Digital</h2>
+<div class="cards">
+<div class="card">Diseño gráfico</div>
+<div class="card">Publicidad digital</div>
+<div class="card">Edición de video</div>
+<div class="card">Branding</div>
+</div>
+</div>
+<div class="bottom">
+<button class="btn alt" onclick="go(2)">Volver</button>
+<button class="btn" onclick="go(4)">Contacto</button>
+</div>
+</section>
 
-      <div class="bottom">
-        <button class="btn alt" onclick="irPagina(0)">Volver</button>
-        <button class="btn">Solicitar servicio</button>
-      </div>
-    </section>
+<!-- PÁGINA 5 CONTACTO -->
+<section class="page contacto">
+<div class="contact-box">
+<h2>Contáctanos</h2>
+<p>Sigua Sticker</p>
+<p>Tel: +504 3366-1836</p>
+<p>WhatsApp disponible</p>
+</div>
+<div class="bottom">
+<button class="btn alt" onclick="go(0)">Inicio</button>
+<a href="https://wa.me/50433661836" class="btn">Escribir por WhatsApp</a>
+</div>
+</section>
 
-  </div>
+</div>
 
-  <!-- ===== INDICADOR ===== -->
-  <div class="dots">● ○</div>
-
-  <!-- ===== SCRIPT ===== -->
-  <script>
-    function irPagina(index){
-      const wrapper = document.getElementById("wrapper");
-      const width = window.innerWidth;
-      wrapper.scrollTo({
-        left: width * index,
-        behavior: "smooth"
-      });
-    }
-  </script>
+<script>
+function go(i){
+const w=document.getElementById("wrapper");
+w.scrollTo({left:window.innerWidth*i,behavior:"smooth"});
+}
+</script>
 
 </body>
 </html>
