@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[11:41 a. m., 28/2/2026] augustozelaya25: <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -71,6 +71,130 @@ h1{
     <div class="page"><img src="5.jpg"></div>
 
 </div>
+
+</body>
+</html>
+[12:07 p. m., 28/2/2026] augustozelaya25: <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo Sigua Stickers</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#0f172a;
+    color:white;
+    text-align:center;
+}
+
+/* ENCABEZADO */
+header{
+    padding:20px;
+    background:#020617;
+}
+
+.logo{
+    height:60px;
+    display:block;
+    margin:0 auto 10px;
+}
+
+h1{
+    margin:5px;
+}
+
+/* VISOR */
+#visor{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:80vh;
+}
+
+#revista{
+    max-width:90%;
+    max-height:100%;
+    border-radius:12px;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+/* BOTONES */
+.controles{
+    margin:20px;
+}
+
+button{
+    padding:10px 20px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="ACEZdigital.png" class="logo">
+    <h1>Catálogo Sigua Stickers</h1>
+</header>
+
+<div id="visor">
+    <img id="revista" src="1Portada.jpg">
+</div>
+
+<div class="controles">
+    <button onclick="anterior()">⟵ Anterior</button>
+    <button onclick="siguiente()">Siguiente ⟶</button>
+</div>
+
+<script>
+
+/* LISTA DE PÁGINAS */
+const paginas = [
+  "1Portada.jpg",
+  "2Pronto.jpg",
+  "3Personalizar.jpg",
+  "4StickMotos.jpg",
+  "5GirlsInside.jpg",
+  "6Lopegamos.jpg"
+];
+
+let paginaActual = 0;
+
+/* MOSTRAR PÁGINA */
+function mostrarPagina(){
+    document.getElementById("revista").src = paginas[paginaActual];
+}
+
+/* SIGUIENTE */
+function siguiente(){
+    if(paginaActual < paginas.length - 1){
+        paginaActual++;
+        mostrarPagina();
+    }
+}
+
+/* ANTERIOR */
+function anterior(){
+    if(paginaActual > 0){
+        paginaActual--;
+        mostrarPagina();
+    }
+}
+
+</script>
 
 </body>
 </html>
