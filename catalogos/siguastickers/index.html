@@ -13,7 +13,7 @@ body{
     background:#0f172a;
     color:white;
     text-align:center;
-    overflow:hidden; /* sin scroll */
+    overflow:hidden;
 }
 
 /* PANTALLAS */
@@ -21,33 +21,31 @@ body{
     display:none;
     height:100vh;
 }
+#inicio{ display:block; }
 
-#inicio{
-    display:block;
-}
-
-/* ===== HEADER ===== */
+/* HEADER */
 .header{
     position:fixed;
     top:0;
     left:0;
     width:100%;
     background:#2f2f2f;
-    padding:14px 16px; /* más alto */
+    padding:14px 12px;
     display:flex;
     justify-content:space-between;
     align-items:center;
-    z-index:1000;
     border-bottom:2px solid yellow;
-}
-
-.header-text b{
-    font-size:18px;
+    z-index:1000;
 }
 
 .header-text{
     text-align:left;
     font-size:14px;
+    margin-left:4px;
+}
+
+.header-text b{
+    font-size:18px;
 }
 
 .whatsapp-btn{
@@ -57,10 +55,10 @@ body{
     border-radius:20px;
     text-decoration:none;
     font-size:14px;
-    margin-right:10px; /* hacia la izquierda */
+    margin-right:0px; /* más hacia la izquierda */
 }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 .footer{
     position:fixed;
     bottom:0;
@@ -76,13 +74,13 @@ body{
 }
 
 .footer img{
-    height:40px; /* más grande */
-    margin-left:8px;
+    height:42px;
+    margin-left:10px;
 }
 
 .footer-text{
     flex:1;
-    padding:0 10px;
+    padding:0 8px;
 }
 
 .footer a{
@@ -92,61 +90,68 @@ body{
     text-decoration:none;
     color:white;
     font-size:13px;
-    margin-right:10px;
+    margin-right:0px; /* más hacia la izquierda */
 }
 
-/* CONTENIDO CENTRAL */
+/* CONTENIDO */
 .contenido{
     height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    padding-top:110px;  /* espacio header */
-    padding-bottom:110px; /* espacio footer */
+    padding-top:120px;
+    padding-bottom:120px;
 }
 
 /* PORTADA */
-.portada{
-    width:90%;
+.portada-wrap{
+    position:relative;
+    width:100%;
     max-width:420px;
+}
+
+.portada{
+    width:100%;
     border-radius:12px;
 }
 
-/* BOTÓN */
-.boton{
-    margin-top:15px;
-    padding:14px 26px;
-    background:#16a34a;
+/* BOTÓN EXACTO ENCIMA DEL BOTÓN ROJO */
+.boton-overlay{
+    position:absolute;
+    bottom:6%;      /* MÁS ABAJO */
+    left:50%;
+    transform:translateX(-50%);
+    width:70%;      /* ancho similar al botón rojo */
+    height:60px;    /* altura del botón rojo */
+    background:transparent; /* invisible encima */
     border:none;
-    border-radius:10px;
-    font-size:18px;
-    color:white;
 }
 
 /* VISOR */
 #visor{
-    height:68vh;
+    height:64vh;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
 #revista{
-    width:92%;
-    max-width:430px;
+    width:94%;
+    max-width:440px;
     border-radius:12px;
     object-fit:contain;
 }
 
 /* VOLVER */
 .volver-btn{
-    margin-top:6px;
-    padding:8px 18px;
+    margin-top:8px;
+    padding:9px 18px;
     border:none;
     border-radius:8px;
     background:#2563eb;
     color:white;
+    font-size:14px;
 }
 
 </style>
@@ -172,84 +177,80 @@ body{
     <a href="https://wa.me/50433661836">WhatsApp</a>
 </div>
 
-<!-- INICIO FIJO -->
+<!-- INICIO -->
 <div id="inicio" class="contenido">
-    <img src="1.jpg" class="portada">
-    <button class="boton" onclick="abrirCatalogo()">Ver catálogo</button>
+
+    <div class="portada-wrap">
+        <img src="1.jpg" class="portada">
+
+        <!-- BOTÓN FUNCIONAL SOBRE EL BOTÓN ROJO -->
+        <button class="boton-overlay" onclick="abrirCatalogo()"></button>
+    </div>
+
 </div>
 
 <!-- CATÁLOGO -->
 <div id="catalogo" class="contenido">
+
     <div id="visor">
         <img id="revista" src="1.jpg">
     </div>
+
     <button class="volver-btn" onclick="volver()">Volver</button>
+
 </div>
 
 <script>
 
-const paginas = [
- "1.jpg",
- "2.jpg",
- "3.jpg",
- "4.jpg",
- "5.jpg",
- "6.jpg"
-];
+const paginas = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];
 
 let paginaActual = 0;
 let auto = null;
 
-/* ABRIR */
 function abrirCatalogo(){
     document.getElementById("inicio").style.display="none";
     document.getElementById("catalogo").style.display="block";
     iniciarAuto();
 }
 
-/* VOLVER */
 function volver(){
     document.getElementById("catalogo").style.display="none";
     document.getElementById("inicio").style.display="block";
     detenerAuto();
 }
 
-/* MOSTRAR */
 function mostrar(){
     document.getElementById("revista").src = paginas[paginaActual];
 }
 
-/* SIGUIENTE */
 function siguiente(){
-    paginaActual=(paginaActual+1)%paginas.length;
+    paginaActual = (paginaActual + 1) % paginas.length;
     mostrar();
 }
 
-/* AUTO */
 function iniciarAuto(){
-    auto=setInterval(()=>{siguiente();},3000);
+    auto = setInterval(()=>{ siguiente(); }, 3000);
 }
 
 function detenerAuto(){
     clearInterval(auto);
 }
 
-/* SWIPE IZQ-DER */
-let startX=0;
+/* SWIPE */
+let startX = 0;
 
-document.getElementById("visor").addEventListener("touchstart",e=>{
-    startX=e.touches[0].clientX;
+document.getElementById("visor").addEventListener("touchstart", e=>{
+    startX = e.touches[0].clientX;
     detenerAuto();
 });
 
-document.getElementById("visor").addEventListener("touchend",e=>{
-    let endX=e.changedTouches[0].clientX;
+document.getElementById("visor").addEventListener("touchend", e=>{
+    let endX = e.changedTouches[0].clientX;
 
-    if(startX > endX+50){
-        siguiente();
-    }
-    if(startX < endX-50){
-        paginaActual=(paginaActual-1+paginas.length)%paginas.length;
+    if(startX > endX + 50) siguiente();
+
+    if(startX < endX - 50){
+        paginaActual = (paginaActual - 1 + paginas.length) % paginas.length;
         mostrar();
     }
 
