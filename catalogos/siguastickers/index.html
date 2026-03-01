@@ -6,24 +6,11 @@
 <title>Sigua Stickers</title>
 
 <style>
-
 body{
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
     background:#0f172a;
     overflow:hidden;
-}
-
-/* PANTALLAS */
-#inicio, #catalogo{
-    height:100vh;
-    display:none;
-}
-
-#inicio{
-    display:flex;
-    justify-content:center;
-    align-items:center;
 }
 
 /* HEADER */
@@ -39,16 +26,13 @@ body{
     border-bottom:2px solid yellow;
     z-index:1000;
 }
-
 .header-text{
-    font-size:14px;
     color:white;
+    font-size:14px;
 }
-
 .header-text b{
     font-size:17px;
 }
-
 .whatsapp-btn{
     background:#25D366;
     padding:8px 14px;
@@ -71,44 +55,17 @@ body{
     border-top:2px solid yellow;
     color:white;
 }
-
 .footer img{
     height:46px;
 }
 
-/* CONTENIDO GENERAL */
-.contenido{
-    width:100%;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding-top:80px;
-    padding-bottom:80px;
-}
-
-/* PDF PORTADA */
-.portada-pdf{
-    width:90%;
-    max-width:400px;
-    height:80vh;
-    border:none;
-    border-radius:12px;
-}
-
-/* CATALOGO */
-#catalogo{
-    display:none;
-    flex-direction:column;
-    justify-content:flex-start;
-    align-items:center;
-    padding-top:80px;
-}
-
 /* VISOR */
 #visor{
-    width:100%;
-    height:80vh;
+    position:absolute;
+    top:70px;
+    bottom:70px;
+    left:0;
+    right:0;
     display:flex;
     justify-content:center;
     align-items:flex-start;
@@ -120,17 +77,6 @@ body{
     max-width:460px;
     border-radius:12px;
 }
-
-/* VOLVER */
-.volver-btn{
-    margin-top:5px;
-    padding:9px 18px;
-    border:none;
-    border-radius:8px;
-    background:#2563eb;
-    color:white;
-}
-
 </style>
 </head>
 
@@ -145,6 +91,11 @@ body{
     <a href="https://wa.me/50496850561" class="whatsapp-btn">WhatsApp</a>
 </div>
 
+<!-- VISOR CATALOGO -->
+<div id="visor">
+    <img id="revista" src="1.jpg">
+</div>
+
 <!-- FOOTER -->
 <div class="footer">
     <img src="ACEZdigital.png">
@@ -152,58 +103,27 @@ body{
     <a href="https://wa.me/50433661836" class="whatsapp-btn">WhatsApp</a>
 </div>
 
-<!-- ===== INICIO (PDF) ===== -->
-<div id="inicio" class="contenido">
-
-    <!-- AQUÍ VA TU PDF -->
-    <iframe src="siguainicio.pdf" class="portada-pdf"></iframe>
-
-</div>
-
-<!-- ===== CATALOGO ===== -->
-<div id="catalogo" class="contenido">
-
-    <div id="visor">
-        <img id="revista" src="1.jpg">
-    </div>
-
-    <button class="volver-btn" onclick="volver()">Volver</button>
-
-</div>
-
 <script>
 
+/* PAGINAS DEL CATALOGO */
 const paginas = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];
 let paginaActual = 0;
 
-/* ABRIR CATALOGO */
-function abrirCatalogo(){
-    document.getElementById("inicio").style.display="none";
-    document.getElementById("catalogo").style.display="flex";
-
-    paginaActual = 0;
-    mostrar();
-}
-
-/* VOLVER */
-function volver(){
-    document.getElementById("catalogo").style.display="none";
-    document.getElementById("inicio").style.display="flex";
-}
-
-/* MOSTRAR PAGINA */
+/* MOSTRAR */
 function mostrar(){
     document.getElementById("revista").src = paginas[paginaActual];
 }
 
-/* SWIPE */
+/* SWIPE IZQUIERDA / DERECHA */
 let startX = 0;
 
-document.getElementById("visor").addEventListener("touchstart", e=>{
+const visor = document.getElementById("visor");
+
+visor.addEventListener("touchstart", e=>{
     startX = e.touches[0].clientX;
 });
 
-document.getElementById("visor").addEventListener("touchend", e=>{
+visor.addEventListener("touchend", e=>{
     let endX = e.changedTouches[0].clientX;
 
     if(startX > endX + 50){
@@ -216,13 +136,6 @@ document.getElementById("visor").addEventListener("touchend", e=>{
         mostrar();
     }
 });
-
-/* DETECTAR SI VIENE DESDE EL PDF */
-window.onload = function(){
-    if(window.location.hash === "#catalogo"){
-        abrirCatalogo();
-    }
-};
 
 </script>
 
