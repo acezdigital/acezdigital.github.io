@@ -19,7 +19,12 @@ body{
     height:100vh;
     display:none;
 }
-#inicio{ display:flex; }
+
+#inicio{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 
 /* HEADER */
 .header{
@@ -71,15 +76,6 @@ body{
     height:46px;
 }
 
-.footer a{
-    background:#25D366;
-    padding:8px 14px;
-    border-radius:20px;
-    text-decoration:none;
-    color:white;
-    margin-right:18px;
-}
-
 /* CONTENIDO GENERAL */
 .contenido{
     width:100%;
@@ -87,36 +83,17 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    padding-top:80px;   /* 🔼 SUBIDO */
+    padding-top:80px;
     padding-bottom:80px;
 }
 
-/* PORTADA */
-.portada-wrap{
-    position:relative;
-    display:flex;
-    justify-content:center;
-}
-
-.portada{
-    width:88%;
-    max-width:360px;
-    border-radius:12px;
-}
-
-/* BOTON REAL */
-.boton{
-    position:absolute;
-    bottom:10%; /* 🔼 SUBIDO */
-    left:50%;
-    transform:translateX(-50%);
-    background:#16a34a;
-    color:white;
+/* PDF PORTADA */
+.portada-pdf{
+    width:90%;
+    max-width:400px;
+    height:80vh;
     border:none;
-    border-radius:25px;
-    padding:14px 28px;
-    font-size:17px;
-    font-weight:bold;
+    border-radius:12px;
 }
 
 /* CATALOGO */
@@ -125,7 +102,7 @@ body{
     flex-direction:column;
     justify-content:flex-start;
     align-items:center;
-    padding-top:80px; /* 🔼 SUBIDO */
+    padding-top:80px;
 }
 
 /* VISOR */
@@ -172,23 +149,26 @@ body{
 <div class="footer">
     <img src="ACEZdigital.png">
     <div>Catálogo diseñado por ACEZ Digital</div>
-    <a href="https://wa.me/50433661836">WhatsApp</a>
+    <a href="https://wa.me/50433661836" class="whatsapp-btn">WhatsApp</a>
 </div>
 
-<!-- INICIO -->
+<!-- ===== INICIO (PDF) ===== -->
 <div id="inicio" class="contenido">
-    <div class="portada-wrap">
-        <img src="1.jpg" class="portada">
-        <button class="boton" onclick="abrirCatalogo()">Ver catálogo</button>
-    </div>
+
+    <!-- AQUÍ VA TU PDF -->
+    <iframe src="siguainicio.pdf" class="portada-pdf"></iframe>
+
 </div>
 
-<!-- CATALOGO -->
+<!-- ===== CATALOGO ===== -->
 <div id="catalogo" class="contenido">
+
     <div id="visor">
         <img id="revista" src="1.jpg">
     </div>
+
     <button class="volver-btn" onclick="volver()">Volver</button>
+
 </div>
 
 <script>
@@ -196,10 +176,13 @@ body{
 const paginas = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];
 let paginaActual = 0;
 
-/* ABRIR */
+/* ABRIR CATALOGO */
 function abrirCatalogo(){
     document.getElementById("inicio").style.display="none";
     document.getElementById("catalogo").style.display="flex";
+
+    paginaActual = 0;
+    mostrar();
 }
 
 /* VOLVER */
@@ -208,7 +191,7 @@ function volver(){
     document.getElementById("inicio").style.display="flex";
 }
 
-/* MOSTRAR */
+/* MOSTRAR PAGINA */
 function mostrar(){
     document.getElementById("revista").src = paginas[paginaActual];
 }
@@ -233,6 +216,13 @@ document.getElementById("visor").addEventListener("touchend", e=>{
         mostrar();
     }
 });
+
+/* DETECTAR SI VIENE DESDE EL PDF */
+window.onload = function(){
+    if(window.location.hash === "#catalogo"){
+        abrirCatalogo();
+    }
+};
 
 </script>
 
