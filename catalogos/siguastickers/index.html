@@ -12,7 +12,6 @@ body{
     font-family:Arial, Helvetica, sans-serif;
     background:#0f172a;
     color:white;
-    text-align:center;
     overflow:hidden;
 }
 
@@ -21,7 +20,7 @@ body{
     display:none;
     height:100vh;
 }
-#inicio{ display:block; }
+#inicio{ display:flex; }
 
 /* HEADER */
 .header{
@@ -39,11 +38,11 @@ body{
 
 .header-text{
     text-align:left;
-    font-size:16px;
+    font-size:14px;
 }
 
 .header-text b{
-    font-size:18px;
+    font-size:17px;
 }
 
 .whatsapp-btn{
@@ -53,7 +52,7 @@ body{
     text-decoration:none;
     color:white;
     font-size:13px;
-    margin-right:35px; /* más adentro */
+    margin-right:25px;
 }
 
 /* FOOTER */
@@ -87,59 +86,79 @@ body{
     text-decoration:none;
     color:white;
     font-size:13px;
-    margin-right:30px; /* más adentro */
+    margin-right:20px;
 }
 
-/* CONTENIDO */
+/* CONTENIDO GENERAL */
 .contenido{
     height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding-top:110px;
-    padding-bottom:110px;
-}
-
-/* PRIMERA IMAGEN */
-.portada-wrap{
-    position:center;
     width:100%;
     display:flex;
     justify-content:center;
+    align-items:center;
+    padding-top:100px;
+    padding-bottom:100px;
+}
+
+/* ================= INICIO ================= */
+
+#inicio{
+    justify-content:center;
+    align-items:center;
+}
+
+.portada-wrap{
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .portada{
-    width:90%;
-    max-width:380px;
+    width:88%;
+    max-width:360px;
     border-radius:12px;
 }
 
-/* BOTÓN VISIBLE */
+/* BOTON CENTRADO */
 .boton-overlay{
     position:absolute;
-    bottom:6%;
+    bottom:7%;
     left:50%;
     transform:translateX(-50%);
-    width:70%;
+    width:65%;
     height:55px;
-    background:rgba(22,163,74,0.8); /* verde visible */
+    background:rgba(22,163,74,0.9);
     border:none;
     border-radius:30px;
-    font-size:18px;
     color:white;
-    font-weight:600;
+    font-size:17px;
+    font-weight:bold;
+}
+
+/* ================= CATALOGO ================= */
+
+#catalogo{
+    display:none;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    padding-top:90px;
+    padding-bottom:80px;
 }
 
 /* VISOR */
 #visor{
-    height:78vh; /* más grande */
+    width:100%;
+    height:78vh;
     display:flex;
     justify-content:center;
-    align-items:center;
+    align-items:flex-start; /* un poco más arriba */
 }
 
+/* IMAGEN REVISTA */
 #revista{
-    width:98%;
+    width:96%;
     max-width:460px;
     border-radius:12px;
     object-fit:contain;
@@ -147,7 +166,7 @@ body{
 
 /* VOLVER */
 .volver-btn{
-    margin-top:5px;
+    margin-top:6px;
     padding:9px 18px;
     border:none;
     border-radius:8px;
@@ -186,8 +205,7 @@ body{
     <div class="portada-wrap">
         <img src="1.jpg" class="portada">
 
-        <!-- BOTÓN VISIBLE Y FUNCIONAL -->
-        <button class="boton-overlay" onclick="Abrir Catalogo()">
+        <button class="boton-overlay" onclick="abrirCatalogo()">
             Ver catálogo
         </button>
     </div>
@@ -210,56 +228,43 @@ body{
 const paginas = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg"];
 
 let paginaActual = 0;
-let auto = null;
 
+/* ABRIR */
 function abrirCatalogo(){
     document.getElementById("inicio").style.display="none";
-    document.getElementById("catalogo").style.display="block";
-    iniciarAuto();
+    document.getElementById("catalogo").style.display="flex";
 }
 
+/* VOLVER */
 function volver(){
     document.getElementById("catalogo").style.display="none";
-    document.getElementById("inicio").style.display="block";
-    detenerAuto();
+    document.getElementById("inicio").style.display="flex";
 }
 
+/* CAMBIO DIRECTO SIN ANIMACION */
 function mostrar(){
     document.getElementById("revista").src = paginas[paginaActual];
 }
 
-function siguiente(){
-    paginaActual = (paginaActual + 1) % paginas.length;
-    mostrar();
-}
-
-function iniciarAuto(){
-    auto = setInterval(()=>{ siguiente(); }, 3000);
-}
-
-function detenerAuto(){
-    clearInterval(auto);
-}
-
-/* SWIPE */
+/* SWIPE IZQUIERDA / DERECHA */
 let startX = 0;
 
 document.getElementById("visor").addEventListener("touchstart", e=>{
     startX = e.touches[0].clientX;
-    detenerAuto();
 });
 
 document.getElementById("visor").addEventListener("touchend", e=>{
     let endX = e.changedTouches[0].clientX;
 
-    if(startX > endX + 50) siguiente();
+    if(startX > endX + 50){
+        paginaActual = (paginaActual + 1) % paginas.length;
+        mostrar();
+    }
 
     if(startX < endX - 50){
         paginaActual = (paginaActual - 1 + paginas.length) % paginas.length;
         mostrar();
     }
-
-    iniciarAuto();
 });
 
 </script>
