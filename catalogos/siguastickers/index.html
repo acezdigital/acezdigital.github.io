@@ -13,11 +13,13 @@ body{
     background:#0f172a;
     color:white;
     text-align:center;
+    overflow:hidden; /* sin scroll */
 }
 
 /* PANTALLAS */
 #inicio, #catalogo{
     display:none;
+    height:100vh;
 }
 
 #inicio{
@@ -31,26 +33,31 @@ body{
     left:0;
     width:100%;
     background:#2f2f2f;
-    padding:10px 12px;
+    padding:14px 16px; /* más alto */
     display:flex;
     justify-content:space-between;
     align-items:center;
-    font-size:13px;
     z-index:1000;
     border-bottom:2px solid yellow;
 }
 
 .header-text b{
-    font-size:16px;
+    font-size:18px;
+}
+
+.header-text{
+    text-align:left;
+    font-size:14px;
 }
 
 .whatsapp-btn{
     background:#25D366;
     color:white;
-    padding:7px 12px;
+    padding:9px 16px;
     border-radius:20px;
     text-decoration:none;
-    font-size:13px;
+    font-size:14px;
+    margin-right:10px; /* hacia la derecha */
 }
 
 /* ===== FOOTER ===== */
@@ -60,88 +67,86 @@ body{
     left:0;
     width:100%;
     background:#2f2f2f;
-    padding:8px;
+    padding:10px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     border-top:2px solid yellow;
-    font-size:12px;
+    font-size:13px;
 }
 
 .footer img{
-    height:30px;
+    height:40px; /* más grande */
+    margin-left:8px;
 }
 
 .footer-text{
     flex:1;
-    padding:0 8px;
+    padding:0 10px;
 }
 
 .footer a{
     background:#25D366;
-    padding:7px 12px;
+    padding:9px 16px;
     border-radius:20px;
     text-decoration:none;
     color:white;
-    font-size:12px;
+    font-size:13px;
+    margin-right:10px;
 }
 
-/* ===== CONTENIDO ===== */
+/* CONTENIDO CENTRAL */
 .contenido{
-    padding-top:85px;
-    padding-bottom:85px;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding-top:110px;  /* espacio header */
+    padding-bottom:110px; /* espacio footer */
 }
 
-/* ===== PORTADA INICIAL ===== */
+/* PORTADA */
 .portada{
-    width:85%;
-    max-width:380px;
+    width:90%;
+    max-width:420px;
     border-radius:12px;
-    margin:auto;
-    display:block;
 }
 
+/* BOTÓN */
 .boton{
-    margin-top:18px;
-    padding:12px 24px;
+    margin-top:15px;
+    padding:14px 26px;
     background:#16a34a;
     border:none;
     border-radius:10px;
-    font-size:16px;
+    font-size:18px;
     color:white;
 }
 
-/* ===== VISOR REVISTA ===== */
+/* VISOR */
 #visor{
-    height:62vh;
+    height:68vh;
     display:flex;
     justify-content:center;
     align-items:center;
 }
 
-/* IMAGEN CENTRAL */
 #revista{
-    width:85%;
-    max-width:380px;
-    max-height:100%;
+    width:92%;
+    max-width:430px;
     border-radius:12px;
     object-fit:contain;
-    transition:opacity .4s;
 }
 
-/* BOTON VOLVER */
+/* VOLVER */
 .volver-btn{
     margin-top:6px;
-    padding:8px 15px;
+    padding:8px 18px;
     border:none;
     border-radius:8px;
     background:#2563eb;
     color:white;
-}
-
-/* SWIPE AREA */
-#visor{
-    touch-action: pan-y;
 }
 
 </style>
@@ -155,38 +160,30 @@ body{
         <b>SIGUA STICKERS</b><br>
         Nuestra calidad es tu garantía
     </div>
-
     <a href="https://wa.me/50496850561" class="whatsapp-btn">WhatsApp</a>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-    <img src="logoacez.png">
+    <img src="ACEZETA.digital.png">
     <div class="footer-text">
-        Catálogo diseñado por ACEZ Digital
+        Catálogo diseñado por ACEZETA Digital
     </div>
-    <a href="https://wa.me/50433661836">WhatsApp</a>
+    <a href="https://wa.me/50496850561">WhatsApp</a>
 </div>
 
-<!-- ===== INICIO ===== -->
+<!-- INICIO FIJO -->
 <div id="inicio" class="contenido">
-
     <img src="1.jpg" class="portada">
-
-    <br>
     <button class="boton" onclick="abrirCatalogo()">Ver catálogo</button>
-
 </div>
 
-<!-- ===== CATALOGO ===== -->
+<!-- CATÁLOGO -->
 <div id="catalogo" class="contenido">
-
     <div id="visor">
         <img id="revista" src="1.jpg">
     </div>
-
     <button class="volver-btn" onclick="volver()">Volver</button>
-
 </div>
 
 <script>
@@ -219,15 +216,10 @@ function volver(){
 
 /* MOSTRAR */
 function mostrar(){
-    let img=document.getElementById("revista");
-    img.style.opacity=0;
-    setTimeout(()=>{
-        img.src=paginas[paginaActual];
-        img.style.opacity=1;
-    },200);
+    document.getElementById("revista").src = paginas[paginaActual];
 }
 
-/* SIGUIENTE AUTOMÁTICO */
+/* SIGUIENTE */
 function siguiente(){
     paginaActual=(paginaActual+1)%paginas.length;
     mostrar();
@@ -242,7 +234,7 @@ function detenerAuto(){
     clearInterval(auto);
 }
 
-/* SWIPE */
+/* SWIPE IZQ-DER */
 let startX=0;
 
 document.getElementById("visor").addEventListener("touchstart",e=>{
@@ -253,8 +245,10 @@ document.getElementById("visor").addEventListener("touchstart",e=>{
 document.getElementById("visor").addEventListener("touchend",e=>{
     let endX=e.changedTouches[0].clientX;
 
-    if(startX>endX+50) siguiente();
-    if(startX<endX-50){
+    if(startX > endX+50){
+        siguiente();
+    }
+    if(startX < endX-50){
         paginaActual=(paginaActual-1+paginas.length)%paginas.length;
         mostrar();
     }
