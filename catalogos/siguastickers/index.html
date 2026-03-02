@@ -13,6 +13,7 @@ html, body{
     background:#0f172a;
     overflow:hidden;
     overscroll-behavior:none;
+    touch-action:none; /* BLOQUEO TOTAL del navegador */
 }
 
 /* HEADER */
@@ -73,7 +74,7 @@ html, body{
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    touch-action:pan-x;
+    touch-action:pan-x; /* SOLO horizontal */
     overscroll-behavior:none;
 }
 
@@ -111,12 +112,11 @@ html, body{
     padding:8px 12px;
     border-radius:50%;
     cursor:pointer;
-    user-select:none;
 }
 #flecha-izq{ left:10px; }
 #flecha-der{ right:10px; }
 
-/* TEXTO FLOTANTE */
+/* TEXTO AYUDA */
 #ayuda-swipe{
     position:absolute;
     top:50%;
@@ -124,12 +124,11 @@ html, body{
     transform:translate(-50%, -50%);
     background:rgba(0,0,0,0.7);
     color:#fff;
-    padding:10px 14px;
+    padding:12px 16px;
     border-radius:10px;
-    font-size:14px;
+    font-size:15px;
     text-align:center;
     opacity:0;
-    pointer-events:none;
     transition:opacity 0.4s ease;
 }
 #ayuda-swipe.mostrar{
@@ -140,7 +139,6 @@ html, body{
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
     <div class="header-text">
         <b>SIGUA STICKERS</b><br>
@@ -149,7 +147,6 @@ html, body{
     <a href="https://wa.me/50496850561" class="whatsapp-btn">WhatsApp</a>
 </div>
 
-<!-- VISOR -->
 <div id="visor">
     <img id="revista" src="1Cel.webp">
 
@@ -158,10 +155,9 @@ html, body{
     <div id="flecha-izq">&#10094;</div>
     <div id="flecha-der">&#10095;</div>
 
-    <div id="ayuda-swipe">Deslizar o tocar el botón.</div>
+    <div id="ayuda-swipe">Desliza hacia la izquierda o derecha</div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
     <img src="ACEZdigital.png">
     <div>Catálogo diseñado por ACEZ Digital</div>
@@ -169,12 +165,6 @@ html, body{
 </div>
 
 <script>
-
-/* BLOQUEOS */
-document.addEventListener("contextmenu", e => e.preventDefault());
-if(window.top !== window.self){
-    window.top.location = window.self.location;
-}
 
 /* PAGINAS */
 const paginas = ["1Cel.webp","2Cel.webp","3Cel.webp","4Cel.webp","5Cel.webp","6Cel.webp"];
@@ -185,6 +175,24 @@ paginas.forEach(src=>{
     const img = new Image();
     img.src = src;
 });
+
+/* AYUDA */
+const ayuda = document.getElementById("ayuda-swipe");
+let primeraVez = true;
+let timerAyuda = null;
+
+function mostrarAyuda(){
+    ayuda.classList.add("mostrar");
+    clearTimeout(timerAyuda);
+
+    let tiempo = primeraVez ? 4000 : 2000;
+
+    timerAyuda = setTimeout(()=>{
+        ayuda.classList.remove("mostrar");
+    }, tiempo);
+
+    primeraVez = false;
+}
 
 /* MOSTRAR */
 function mostrar(){
@@ -197,7 +205,6 @@ function mostrar(){
     if(paginaActual === 0){
         izq.style.display = "none";
         der.style.display = "block";
-        mostrarAyuda();
     }
     else if(paginaActual === paginas.length - 1){
         izq.style.display = "block";
@@ -209,34 +216,44 @@ function mostrar(){
     }
 }
 
-/* CONTROL TACTIL */
+/* CONTROL TACTIL SOLO HORIZONTAL */
 let startX = 0;
 let startY = 0;
+
 const visor = document.getElementById("visor");
 
 visor.addEventListener("touchstart", e=>{
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
-}, { passive:true });
+
+    if(paginaActual === 0){
+        mostrarAyuda();
+    }
+}, { passive:false });
 
 visor.addEventListener("touchmove", function(e){
-    const deltaY = Math.abs(e.touches[0].clientY - startY);
-    if(deltaY > 5){
-        e.preventDefault(); /* BLOQUEA VERTICAL */
+    const moveX = e.touches[0].clientX;
+    const moveY = e.touches[0].clientY;
+
+    const diffX = Math.abs(moveX - startX);
+    const diffY = Math.abs(moveY - startY);
+
+    if(diffY > diffX){
+        e.preventDefault(); /* BLOQUEA vertical */
     }
 }, { passive:false });
 
 visor.addEventListener("touchend", e=>{
-    let endX = e.changedTouches[0].clientX;
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
 
-    if(startX > endX + 30){
+    if(diff > 40){
         if(paginaActual < paginas.length - 1){
             paginaActual++;
             mostrar();
         }
     }
-
-    if(startX < endX - 30){
+    else if(diff < -40){
         if(paginaActual > 0){
             paginaActual--;
             mostrar();
@@ -257,18 +274,6 @@ document.getElementById("flecha-izq").onclick = ()=>{
         mostrar();
     }
 };
-
-/* AYUDA */
-const ayuda = document.getElementById("ayuda-swipe");
-let timerAyuda = null;
-
-function mostrarAyuda(){
-    ayuda.classList.add("mostrar");
-    clearTimeout(timerAyuda);
-    timerAyuda = setTimeout(()=>{
-        ayuda.classList.remove("mostrar");
-    }, 2500);
-}
 
 /* INICIO */
 mostrar();
