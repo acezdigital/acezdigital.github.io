@@ -11,6 +11,7 @@ body{
     font-family:Arial, Helvetica, sans-serif;
     background:#0f172a;
     overflow:hidden;
+    overscroll-behavior:none;
 }
 
 /* HEADER */
@@ -71,6 +72,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:flex-start;
+    touch-action:pan-x; /* SOLO horizontal */
 }
 
 /* IMAGEN */
@@ -186,15 +188,46 @@ paginas.forEach(src=>{
 function mostrar(){
     document.getElementById("revista").src = paginas[paginaActual];
     document.getElementById("indicador").innerText = (paginaActual+1)+" / "+paginas.length;
+
+    const izq = document.getElementById("flecha-izq");
+    const der = document.getElementById("flecha-der");
+
+    // CONTROL DE FLECHAS
+    if(paginaActual === 0){
+        izq.style.display = "none";
+        der.style.display = "block";
+        mostrarAyuda();
+    }
+    else if(paginaActual === paginas.length - 1){
+        izq.style.display = "block";
+        der.style.display = "none";
+    }
+    else{
+        izq.style.display = "block";
+        der.style.display = "block";
+    }
 }
 
 /* SWIPE */
 let startX = 0;
+let startY = 0;
 const visor = document.getElementById("visor");
 
 visor.addEventListener("touchstart", e=>{
     startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+
+    if(paginaActual === 0){
+        mostrarAyuda();
+    }
 });
+
+visor.addEventListener("touchmove", function(e){
+    let deltaY = Math.abs(e.touches[0].clientY - startY);
+    if(deltaY > 10){
+        e.preventDefault();
+    }
+}, { passive:false });
 
 visor.addEventListener("touchend", e=>{
     let endX = e.changedTouches[0].clientX;
@@ -228,7 +261,7 @@ document.getElementById("flecha-izq").onclick = ()=>{
     }
 };
 
-/* TEXTO FLOTANTE */
+/* AYUDA */
 const ayuda = document.getElementById("ayuda-swipe");
 let timerAyuda = null;
 
@@ -240,8 +273,8 @@ function mostrarAyuda(){
     }, 2500);
 }
 
-visor.addEventListener("touchstart", mostrarAyuda);
-visor.addEventListener("click", mostrarAyuda);
+/* INICIAR */
+mostrar();
 
 </script>
 
