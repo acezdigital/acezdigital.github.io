@@ -6,7 +6,8 @@
 <title>Sigua Stickers</title>
 
 <style>
-body{
+html, body{
+    height:100%;
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
     background:#0f172a;
@@ -72,7 +73,8 @@ body{
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    touch-action:pan-x; /* SOLO horizontal */
+    touch-action:pan-x;
+    overscroll-behavior:none;
 }
 
 /* IMAGEN */
@@ -104,7 +106,7 @@ body{
     top:50%;
     transform:translateY(-50%);
     font-size:30px;
-    color:white;
+    color:yellow;
     background:rgba(0,0,0,0.4);
     padding:8px 12px;
     border-radius:50%;
@@ -156,7 +158,7 @@ body{
     <div id="flecha-izq">&#10094;</div>
     <div id="flecha-der">&#10095;</div>
 
-    <div id="ayuda-swipe">Desliza hacia la izquierda o derecha</div>
+    <div id="ayuda-swipe">Deslizar o tocar el botón.</div>
 </div>
 
 <!-- FOOTER -->
@@ -168,7 +170,7 @@ body{
 
 <script>
 
-/* BLOQUEOS BASICOS */
+/* BLOQUEOS */
 document.addEventListener("contextmenu", e => e.preventDefault());
 if(window.top !== window.self){
     window.top.location = window.self.location;
@@ -192,7 +194,6 @@ function mostrar(){
     const izq = document.getElementById("flecha-izq");
     const der = document.getElementById("flecha-der");
 
-    // CONTROL DE FLECHAS
     if(paginaActual === 0){
         izq.style.display = "none";
         der.style.display = "block";
@@ -208,7 +209,7 @@ function mostrar(){
     }
 }
 
-/* SWIPE */
+/* CONTROL TACTIL */
 let startX = 0;
 let startY = 0;
 const visor = document.getElementById("visor");
@@ -216,16 +217,12 @@ const visor = document.getElementById("visor");
 visor.addEventListener("touchstart", e=>{
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
-
-    if(paginaActual === 0){
-        mostrarAyuda();
-    }
-});
+}, { passive:true });
 
 visor.addEventListener("touchmove", function(e){
-    let deltaY = Math.abs(e.touches[0].clientY - startY);
-    if(deltaY > 10){
-        e.preventDefault();
+    const deltaY = Math.abs(e.touches[0].clientY - startY);
+    if(deltaY > 5){
+        e.preventDefault(); /* BLOQUEA VERTICAL */
     }
 }, { passive:false });
 
@@ -273,7 +270,7 @@ function mostrarAyuda(){
     }, 2500);
 }
 
-/* INICIAR */
+/* INICIO */
 mostrar();
 
 </script>
