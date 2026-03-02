@@ -13,7 +13,7 @@ html, body{
     background:#0f172a;
     overflow:hidden;
     overscroll-behavior:none;
-    touch-action:none; /* BLOQUEO TOTAL del navegador */
+    touch-action:none;
 }
 
 /* HEADER */
@@ -74,7 +74,7 @@ html, body{
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    touch-action:pan-x; /* SOLO horizontal */
+    touch-action:pan-x;
     overscroll-behavior:none;
 }
 
@@ -160,7 +160,7 @@ html, body{
 
 <div class="footer">
     <img src="ACEZdigital.png">
-    <div>Catálogo diseñado por: *ACEZ Digital<sup>®</sup></div>
+    <div>Catálogo diseñado por: ACEZ Digital<sup>®</sup></div>
     <a href="https://wa.me/50433661836" class="whatsapp-btn">WhatsApp</a>
 </div>
 
@@ -216,15 +216,17 @@ function mostrar(){
     }
 }
 
-/* CONTROL TACTIL SOLO HORIZONTAL */
+/* CONTROL TÁCTIL DEFINITIVO */
 let startX = 0;
 let startY = 0;
+let bloqueandoVertical = false;
 
 const visor = document.getElementById("visor");
 
-visor.addEventListener("touchstart", e=>{
+visor.addEventListener("touchstart", function(e){
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
+    bloqueandoVertical = false;
 
     if(paginaActual === 0){
         mostrarAyuda();
@@ -232,18 +234,25 @@ visor.addEventListener("touchstart", e=>{
 }, { passive:false });
 
 visor.addEventListener("touchmove", function(e){
-    const moveX = e.touches[0].clientX;
-    const moveY = e.touches[0].clientY;
 
-    const diffX = Math.abs(moveX - startX);
-    const diffY = Math.abs(moveY - startY);
+    const currentX = e.touches[0].clientX;
+    const currentY = e.touches[0].clientY;
+
+    const diffX = Math.abs(currentX - startX);
+    const diffY = Math.abs(currentY - startY);
 
     if(diffY > diffX){
-        e.preventDefault(); /* BLOQUEA vertical */
+        bloqueandoVertical = true;
+        e.preventDefault();
+        return;
     }
+
 }, { passive:false });
 
-visor.addEventListener("touchend", e=>{
+visor.addEventListener("touchend", function(e){
+
+    if(bloqueandoVertical) return;
+
     const endX = e.changedTouches[0].clientX;
     const diff = startX - endX;
 
@@ -259,7 +268,8 @@ visor.addEventListener("touchend", e=>{
             mostrar();
         }
     }
-});
+
+}, { passive:false });
 
 /* FLECHAS */
 document.getElementById("flecha-der").onclick = ()=>{
