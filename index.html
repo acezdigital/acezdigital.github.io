@@ -4,94 +4,149 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ACEZ Digital | Diseño web y marketing digital</title>
+<title>ACEZ Digital | Agencia de Diseño Web y Marketing Digital</title>
 
-<meta name="description" content="ACEZ Digital impulsa tu negocio al mundo digital con diseño web profesional, marketing estratégico y presencia online efectiva.">
+<meta name="description" content="ACEZ Digital impulsa tu negocio al mundo digital con diseño web profesional, marketing estratégico y presencia online efectiva para emprendedores en Latinoamérica.">
 
-<meta name="keywords" content="diseño web Honduras, marketing digital, páginas web, catálogos digitales">
-
-<meta name="author" content="ACEZ Digital">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://acezdigital.com">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="ACEZ Digital | Impulsamos tu negocio al mundo digital">
-<meta property="og:description" content="Diseño web, marketing digital y presencia online profesional.">
+<meta property="og:description" content="Diseño web, marketing digital y presencia online profesional para emprendedores.">
 <meta property="og:url" content="https://acezdigital.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-body {
+* {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: white;
-    text-align: center;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-header {
-    padding: 60px 20px 40px;
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Fondo abstracto */
+body::before {
+    content: "";
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,198,255,0.4), transparent 70%);
+    top: -200px;
+    right: -200px;
+    filter: blur(120px);
+    z-index: 0;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content {
+    max-width: 800px;
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.05);
+    padding: 50px 30px;
+    border-radius: 20px;
+    animation: fadeIn 1.2s ease-out;
 }
 
 .logo img {
-    max-width: 220px;
+    max-width: 200px;
     margin-bottom: 30px;
 }
 
 h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-h1 span {
-    font-weight: 300;
-    display: block;
-    font-size: 1.3rem;
+    font-size: 2.6rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
 }
 
 p {
     font-size: 1.1rem;
+    font-weight: 300;
+    margin-bottom: 35px;
     opacity: 0.9;
 }
 
 .btn {
     display: inline-block;
-    margin-top: 25px;
-    padding: 12px 25px;
-    background: #00c6ff;
-    color: #000;
-    border-radius: 30px;
+    padding: 14px 35px;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    color: white;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+    font-weight: 600;
+    transition: 0.4s ease;
+    box-shadow: 0 0 20px rgba(0,198,255,0.6);
 }
 
 .btn:hover {
-    background: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(0,198,255,0.9);
 }
 
+/* Sección catálogo */
 #catalogo {
-    margin-top: 60px;
-    padding-bottom: 80px;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+#visor {
+    max-width: 900px;
+    margin: 40px auto;
 }
 
 canvas {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 15px;
 }
 
 button {
-    padding: 8px 18px;
-    border-radius: 20px;
+    padding: 10px 22px;
+    border-radius: 30px;
     border: none;
     cursor: pointer;
     margin: 10px;
-    background: #00c6ff;
-    font-weight: bold;
+    font-weight: 600;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    color: white;
+    transition: 0.3s;
 }
 
 button:hover {
-    background: white;
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media(max-width: 768px){
+    h1 {
+        font-size: 2rem;
+    }
+    .hero-content {
+        padding: 35px 20px;
+    }
 }
 
 </style>
@@ -99,25 +154,85 @@ button:hover {
 
 <body>
 
-<header>
-    <div class="logo">
-        <img src="ACEZdigital.png" alt="ACEZ Digital">
+<section class="hero">
+    <div class="hero-content">
+
+        <div class="logo">
+            <img src="ACEZdigital.png" alt="ACEZ Digital">
+        </div>
+
+        <h1>Impulsamos tu negocio al mundo digital</h1>
+
+        <p>
+            Diseño web profesional, catálogos digitales y estrategias de marketing 
+            para emprendedores y negocios en Latinoamérica.
+        </p>
+
+        <a href="#catalogo" class="btn">Ver catálogo</a>
+
     </div>
-
-    <h1>
-        Impulsamos tu negocio al mundo digital
-        <span>Diseño web, marketing y presencia online para emprendedores</span>
-    </h1>
-
-    <a class="btn" href="#catalogo">Ver catálogo</a>
-</header>
+</section>
 
 <section id="catalogo">
 
-<div id="visor" style="max-width:900px; margin:40px auto;">
+<div id="visor">
   <canvas id="pdf-canvas"></canvas>
 
-  <div style="margin-top:15px;">
+  <div style="margin-top:20px;">
     <button onclick="prevPage()">⬅ Anterior</button>
     <span id="page-num"></span> / <span id="page-count"></span>
-    <button onclick="nextPage()">Siguiente ➡
+    <button onclick="nextPage()">Siguiente ➡</button>
+  </div>
+</div>
+
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+const url = "https://acezdigital.github.io/catalogos/SiguaStickers.pdf";
+
+let pdfDoc = null,
+    pageNum = 1,
+    canvas = document.getElementById('pdf-canvas'),
+    ctx = canvas.getContext('2d');
+
+pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+  pdfDoc = pdfDoc_;
+  document.getElementById('page-count').textContent = pdfDoc.numPages;
+  renderPage(pageNum);
+});
+
+function renderPage(num) {
+  pdfDoc.getPage(num).then(function(page) {
+    let viewport = page.getViewport({ scale: 2 });
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    page.render({
+      canvasContext: ctx,
+      viewport: viewport
+    });
+
+    document.getElementById('page-num').textContent = num;
+  });
+}
+
+function prevPage() {
+  if (pageNum <= 1) return;
+  pageNum--;
+  renderPage(pageNum);
+}
+
+function nextPage() {
+  if (pageNum >= pdfDoc.numPages) return;
+  pageNum++;
+  renderPage(pageNum);
+}
+</script>
+
+</body>
+</html>
