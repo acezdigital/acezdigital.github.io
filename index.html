@@ -31,6 +31,23 @@ background-color:#0b1c2c;
 .link{
 position:absolute;
 display:block;
+cursor:pointer;
+
+/* transición suave */
+transition:transform 0.15s ease, filter 0.15s ease;
+}
+
+/* EFECTO AL PASAR EL CURSOR */
+
+.link:hover{
+transform:scale(1.05);
+filter:brightness(1.15);
+}
+
+/* EFECTO AL TOCAR */
+
+.link:active{
+transform:scale(0.95);
 }
 
 /* WhatsApp */
@@ -61,7 +78,6 @@ height:8%;
 }
 
 </style>
-
 </head>
 
 <body>
