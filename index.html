@@ -35,20 +35,20 @@ cursor:pointer;
 transition:transform 0.35s ease, filter 0.35s ease;
 }
 
-/* efecto al pasar cursor */
+/* EFECTO AL PASAR */
 
 .link:hover{
 transform:scale(1.02);
 filter:brightness(1.08);
 }
 
-/* efecto al tocar */
+/* EFECTO AL TOCAR */
 
 .link:active{
 transform:scale(0.98);
 }
 
-/* WhatsApp */
+/* WHATSAPP */
 
 .whatsapp{
 top:2%;
@@ -57,16 +57,16 @@ width:28%;
 height:8%;
 }
 
-/* Catálogo */
+/* VER CATÁLOGOS */
 
 .catalogo{
-top:26%;
+top:26%;   /* se subió un poco más */
 left:6%;
 width:36%;
 height:12%;
 }
 
-/* Correo */
+/* CORREO */
 
 .correo{
 bottom:4%;
@@ -80,16 +80,24 @@ height:8%;
 
 <body>
 
+<!-- WHATSAPP -->
+
 <a class="link whatsapp"
 href="https://wa.me/50433661836?text=Hola,%20¿me%20podría%20brindar%20más%20información%20sobre%20sus%20servicios%20digitales?"
-target="_blank"></a>
+target="_blank"
+title="WhatsApp"></a>
+
+<!-- VER CATÁLOGOS -->
 
 <a class="link catalogo"
 href="https://acezdigital.github.io/catalogos/siguastickers/"
-target="_blank"></a>
+title="Ver catálogo"></a>
+
+<!-- CORREO -->
 
 <a class="link correo"
-href="mailto:acezdigita@gmail.com"></a>
+href="mailto:acezdigita@gmail.com"
+title="Correo electrónico"></a>
 
 </body>
 
