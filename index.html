@@ -14,6 +14,7 @@ margin:0;
 padding:0;
 height:100%;
 overflow:hidden;
+font-family:Arial, Helvetica, sans-serif;
 }
 
 /* FONDO */
@@ -35,14 +36,10 @@ cursor:pointer;
 transition:transform 0.35s ease, filter 0.35s ease;
 }
 
-/* EFECTO AL PASAR */
-
 .link:hover{
 transform:scale(1.02);
 filter:brightness(1.08);
 }
-
-/* EFECTO AL TOCAR */
 
 .link:active{
 transform:scale(0.98);
@@ -60,7 +57,7 @@ height:8%;
 /* VER CATÁLOGOS */
 
 .catalogo{
-top:26%;   /* se subió un poco más */
+top:26%;
 left:6%;
 width:36%;
 height:12%;
@@ -73,6 +70,75 @@ bottom:4%;
 right:6%;
 width:28%;
 height:8%;
+}
+
+/* PANEL CATÁLOGOS */
+
+#panelCatalogos{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#0b1c2c;
+display:none;
+flex-direction:column;
+z-index:9999;
+}
+
+/* BOTÓN CERRAR */
+
+.cerrar{
+position:absolute;
+top:20px;
+right:25px;
+font-size:30px;
+color:white;
+cursor:pointer;
+}
+
+/* TÍTULO */
+
+.tituloCatalogos{
+color:white;
+text-align:center;
+margin-top:40px;
+font-size:28px;
+}
+
+/* CONTENEDOR NETFLIX */
+
+.catalogos{
+display:flex;
+gap:25px;
+overflow-x:auto;
+padding:40px;
+margin-top:20px;
+}
+
+/* TARJETAS */
+
+.catalogo-card{
+min-width:220px;
+text-decoration:none;
+color:white;
+transition:transform .35s ease;
+}
+
+.catalogo-card img{
+width:100%;
+border-radius:10px;
+box-shadow:0 10px 20px rgba(0,0,0,0.5);
+}
+
+.catalogo-card:hover{
+transform:scale(1.08);
+}
+
+.catalogo-card p{
+text-align:center;
+margin-top:10px;
+font-size:15px;
 }
 
 </style>
@@ -90,7 +156,7 @@ title="WhatsApp"></a>
 <!-- VER CATÁLOGOS -->
 
 <a class="link catalogo"
-href="https://acezdigital.github.io/catalogos/siguastickers/"
+onclick="abrirCatalogos()"
 title="Ver catálogo"></a>
 
 <!-- CORREO -->
@@ -98,6 +164,60 @@ title="Ver catálogo"></a>
 <a class="link correo"
 href="mailto:acezdigita@gmail.com"
 title="Correo electrónico"></a>
+
+<!-- PANEL DE CATÁLOGOS -->
+
+<div id="panelCatalogos">
+
+<div class="cerrar" onclick="cerrarCatalogos()">✕</div>
+
+<div class="tituloCatalogos">
+Catálogos Digitales
+</div>
+
+<div class="catalogos">
+
+<!-- SIGUA STICKERS -->
+
+<a class="catalogo-card"
+href="https://acezdigital.github.io/catalogos/siguastickers/">
+
+<img src="catalogos/siguastickers/1Cel.webp">
+
+<p>Sigua Stickers</p>
+
+</a>
+
+<!-- HOMBRES DE VALOR -->
+
+<a class="catalogo-card"
+href="https://acezdigital.github.io/catalogos/hombresdevalor/">
+
+<img src="catalogos/hombresdevalor/1.webp">
+
+<p>Hombres de Valor</p>
+
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function abrirCatalogos(){
+
+document.getElementById("panelCatalogos").style.display="flex";
+
+}
+
+function cerrarCatalogos(){
+
+document.getElementById("panelCatalogos").style.display="none";
+
+}
+
+</script>
 
 </body>
 
