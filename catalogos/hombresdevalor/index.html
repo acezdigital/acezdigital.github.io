@@ -246,4 +246,115 @@ img.style.opacity = 1;
 },150);
 
 document.getElementById("indicador").innerText =
-(paginaActual+1)+" / "+pag
+(paginaActual+1)+" / "+paginas.length;
+
+const izq = document.getElementById("flecha-izq");
+const der = document.getElementById("flecha-der");
+
+if(paginaActual === 0){
+izq.style.display = "none";
+der.style.display = "block";
+}
+else if(paginaActual === paginas.length - 1){
+izq.style.display = "block";
+der.style.display = "none";
+}
+else{
+izq.style.display = "block";
+der.style.display = "block";
+}
+
+}
+
+/* CONTROL TÁCTIL */
+
+let startX = 0;
+let startY = 0;
+let bloqueandoVertical = false;
+
+const visor = document.getElementById("visor");
+
+visor.addEventListener("touchstart", function(e){
+
+startX = e.touches[0].clientX;
+startY = e.touches[0].clientY;
+
+bloqueandoVertical = false;
+
+if(paginaActual === 0){
+mostrarAyuda();
+}
+
+},{ passive:false });
+
+visor.addEventListener("touchmove", function(e){
+
+const currentX = e.touches[0].clientX;
+const currentY = e.touches[0].clientY;
+
+const diffX = Math.abs(currentX - startX);
+const diffY = Math.abs(currentY - startY);
+
+if(diffY > diffX){
+bloqueandoVertical = true;
+e.preventDefault();
+return;
+}
+
+},{ passive:false });
+
+visor.addEventListener("touchend", function(e){
+
+if(bloqueandoVertical) return;
+
+const endX = e.changedTouches[0].clientX;
+
+const diff = startX - endX;
+
+if(diff > 40){
+
+if(paginaActual < paginas.length - 1){
+paginaActual++;
+mostrar();
+}
+
+}
+else if(diff < -40){
+
+if(paginaActual > 0){
+paginaActual--;
+mostrar();
+}
+
+}
+
+},{ passive:false });
+
+/* FLECHAS */
+
+document.getElementById("flecha-der").onclick = ()=>{
+if(paginaActual < paginas.length - 1){
+paginaActual++;
+mostrar();
+}
+};
+
+document.getElementById("flecha-izq").onclick = ()=>{
+if(paginaActual > 0){
+paginaActual--;
+mostrar();
+}
+};
+
+/* BLOQUEAR CLICK DERECHO */
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+/* INICIO */
+
+mostrar();
+
+</script>
+
+</body>
+</html>
