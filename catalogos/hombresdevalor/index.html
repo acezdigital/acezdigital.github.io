@@ -6,308 +6,244 @@
 <title>Hombres de Valor</title>
 
 <style>
+
 html, body{
-    height:100%;
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#0f172a;
-    overflow:hidden;
-    overscroll-behavior:none;
-    touch-action:none;
+height:100%;
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#0f172a;
+overflow:hidden;
+overscroll-behavior:none;
+touch-action:none;
 }
 
 /* HEADER */
+
 .header{
-    position:fixed;
-    top:0;
-    width:100%;
-    background:#2f2f2f;
-    padding:12px 18px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    border-bottom:2px solid yellow;
-    z-index:1000;
-    text-align:center;
+position:fixed;
+top:0;
+width:100%;
+background:#2f2f2f;
+padding:12px;
+text-align:center;
+border-bottom:2px solid yellow;
+z-index:1000;
 }
 
 .header-text{
-    color:white;
-    font-size:18px;
+color:white;
+font-size:18px;
 }
 
 .header-text b{
-    font-size:20px;
+font-size:20px;
 }
 
 /* FOOTER */
+
 .footer{
-    position:fixed;
-    bottom:0;
-    width:100%;
-    background:#2f2f2f;
-    padding:12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-top:2px solid yellow;
-    color:white;
-    gap:20px;
+position:fixed;
+bottom:0;
+width:100%;
+background:#2f2f2f;
+padding:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-top:2px solid yellow;
+color:white;
+gap:18px;
 }
 
 .footer img{
-    height:44px;
+height:44px;
+}
+
+/* BOTÓN WHATSAPP */
+
+.whatsapp-btn{
+background:#25D366;
+padding:8px 16px;
+border-radius:20px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+font-size:14px;
 }
 
 /* VISOR */
+
 #visor{
-    position:absolute;
-    top:70px;
-    bottom:70px;
-    left:0;
-    right:0;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    touch-action:pan-x;
-    overscroll-behavior:none;
+position:absolute;
+top:70px;
+bottom:70px;
+left:0;
+right:0;
+display:flex;
+justify-content:center;
+align-items:flex-start;
+touch-action:pan-x;
+overscroll-behavior:none;
 }
 
 /* IMAGEN */
+
 #revista{
-    width:96%;
-    max-width:460px;
-    border-radius:12px;
-    user-select:none;
-    -webkit-user-drag:none;
-    pointer-events:none;
-    transition:opacity .35s ease;
+width:96%;
+max-width:460px;
+border-radius:12px;
+user-select:none;
+-webkit-user-drag:none;
+pointer-events:none;
+transition:opacity .35s ease;
 }
 
 /* INDICADOR */
+
 #indicador{
-    position:absolute;
-    bottom:10px;
-    left:50%;
-    transform:translateX(-50%);
-    background:rgba(0,0,0,0.6);
-    color:#fff;
-    padding:4px 10px;
-    border-radius:10px;
-    font-size:13px;
+position:absolute;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,0.6);
+color:#fff;
+padding:4px 10px;
+border-radius:10px;
+font-size:13px;
 }
 
 /* FLECHAS */
+
 #flecha-izq, #flecha-der{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    font-size:30px;
-    color:yellow;
-    background:rgba(0,0,0,0.4);
-    padding:8px 12px;
-    border-radius:50%;
-    cursor:pointer;
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:30px;
+color:yellow;
+background:rgba(0,0,0,0.4);
+padding:8px 12px;
+border-radius:50%;
+cursor:pointer;
 }
 
 #flecha-izq{ left:10px; }
 #flecha-der{ right:10px; }
 
 /* TEXTO AYUDA */
+
 #ayuda-swipe{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    background:rgba(0,0,0,0.7);
-    color:#fff;
-    padding:12px 16px;
-    border-radius:10px;
-    font-size:15px;
-    text-align:center;
-    opacity:0;
-    transition:opacity 0.4s ease;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%);
+background:rgba(0,0,0,0.7);
+color:#fff;
+padding:12px 16px;
+border-radius:10px;
+font-size:15px;
+text-align:center;
+opacity:0;
+transition:opacity 0.4s ease;
 }
 
 #ayuda-swipe.mostrar{
-    opacity:1;
+opacity:1;
 }
-</style> 
-/* BOTÓN WHATSAPP */
-.whatsapp-btn{
-    background:#25D366;
-    padding:8px 14px;
-    border-radius:20px;
-    text-decoration:none;
-    color:white;
-    font-size:14px;
-}    
+
+</style>
 </head>
 
 <body>
 
 <div class="header">
-    <div class="header-text">
-        <b>HOMBRES DE VALOR</b><br>
-        Siguatepeque
-    </div>
+<div class="header-text">
+<b>HOMBRES DE VALOR</b><br>
+Siguatepeque
+</div>
 </div>
 
 <div id="visor">
-    <img id="revista" src="1.webp">
 
-    <div id="indicador">1 / 4</div>
+<img id="revista" src="1.webp">
 
-    <div id="flecha-izq">&#10094;</div>
-    <div id="flecha-der">&#10095;</div>
+<div id="indicador">1 / 4</div>
 
-    <div id="ayuda-swipe">Desliza hacia la izquierda o derecha o toca la flecha.</div>
+<div id="flecha-izq">&#10094;</div>
+<div id="flecha-der">&#10095;</div>
+
+<div id="ayuda-swipe">
+Desliza hacia la izquierda o derecha o toca la flecha.
+</div>
+
 </div>
 
 <div class="footer">
-    <img src="ACEZdigital.png">
-    <div>Catálogo diseñado por: ACEZ Digital<sup>®</sup></div>
-    <a href="https://wa.me/50433661836?text=Hola,%20¿me%20podría%20brindar%20mayor%20información%20sobre%20sus%20catálogos%20y%20asesoría%20digital?" class="whatsapp-btn">WhatsApp</a>
+
+<img src="ACEZdigital.png">
+
+<div>
+Catálogo diseñado por: ACEZ Digital<sup>®</sup>
+</div>
+
+<a href="https://wa.me/50433661836?text=Hola,%20¿me%20podría%20brindar%20mayor%20información%20sobre%20sus%20catálogos%20y%20asesoría%20digital?" class="whatsapp-btn">
+WhatsApp
+</a>
+
 </div>
 
 <script>
 
 /* PAGINAS */
-const paginas = ["1.webp","2.webp","3.webp","4.webp"];
+
+const paginas = [
+"1.webp",
+"2.webp",
+"3.webp",
+"4.webp"
+];
+
 let paginaActual = 0;
 
 /* PRECARGA */
+
 paginas.forEach(src=>{
-    const img = new Image();
-    img.src = src;
+const img = new Image();
+img.src = src;
 });
 
 /* AYUDA */
+
 const ayuda = document.getElementById("ayuda-swipe");
 let primeraVez = true;
 let timerAyuda = null;
 
 function mostrarAyuda(){
-    ayuda.classList.add("mostrar");
-    clearTimeout(timerAyuda);
 
-    let tiempo = primeraVez ? 4000 : 2000;
+ayuda.classList.add("mostrar");
 
-    timerAyuda = setTimeout(()=>{
-        ayuda.classList.remove("mostrar");
-    }, tiempo);
+clearTimeout(timerAyuda);
 
-    primeraVez = false;
+let tiempo = primeraVez ? 4000 : 2000;
+
+timerAyuda = setTimeout(()=>{
+ayuda.classList.remove("mostrar");
+}, tiempo);
+
+primeraVez = false;
 }
 
 /* MOSTRAR */
+
 function mostrar(){
 
-    const img = document.getElementById("revista");
+const img = document.getElementById("revista");
 
-    img.style.opacity = 0;
+img.style.opacity = 0;
 
-    setTimeout(()=>{
-        img.src = paginas[paginaActual];
-        img.style.opacity = 1;
-    },150);
+setTimeout(()=>{
+img.src = paginas[paginaActual];
+img.style.opacity = 1;
+},150);
 
-    document.getElementById("indicador").innerText = (paginaActual+1)+" / "+paginas.length;
-
-    const izq = document.getElementById("flecha-izq");
-    const der = document.getElementById("flecha-der");
-
-    if(paginaActual === 0){
-        izq.style.display = "none";
-        der.style.display = "block";
-    }
-    else if(paginaActual === paginas.length - 1){
-        izq.style.display = "block";
-        der.style.display = "none";
-    }
-    else{
-        izq.style.display = "block";
-        der.style.display = "block";
-    }
-}
-
-/* CONTROL TÁCTIL */
-let startX = 0;
-let startY = 0;
-let bloqueandoVertical = false;
-
-const visor = document.getElementById("visor");
-
-visor.addEventListener("touchstart", function(e){
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-    bloqueandoVertical = false;
-
-    if(paginaActual === 0){
-        mostrarAyuda();
-    }
-}, { passive:false });
-
-visor.addEventListener("touchmove", function(e){
-
-    const currentX = e.touches[0].clientX;
-    const currentY = e.touches[0].clientY;
-
-    const diffX = Math.abs(currentX - startX);
-    const diffY = Math.abs(currentY - startY);
-
-    if(diffY > diffX){
-        bloqueandoVertical = true;
-        e.preventDefault();
-        return;
-    }
-
-}, { passive:false });
-
-visor.addEventListener("touchend", function(e){
-
-    if(bloqueandoVertical) return;
-
-    const endX = e.changedTouches[0].clientX;
-    const diff = startX - endX;
-
-    if(diff > 40){
-        if(paginaActual < paginas.length - 1){
-            paginaActual++;
-            mostrar();
-        }
-    }
-    else if(diff < -40){
-        if(paginaActual > 0){
-            paginaActual--;
-            mostrar();
-        }
-    }
-
-}, { passive:false });
-
-/* FLECHAS */
-document.getElementById("flecha-der").onclick = ()=>{
-    if(paginaActual < paginas.length - 1){
-        paginaActual++;
-        mostrar();
-    }
-};
-
-document.getElementById("flecha-izq").onclick = ()=>{
-    if(paginaActual > 0){
-        paginaActual--;
-        mostrar();
-    }
-};
-
-/* BLOQUEAR CLICK DERECHO */
-document.addEventListener("contextmenu", e => e.preventDefault());
-
-/* INICIO */
-mostrar();
-
-</script>
-
-</body>
-</html>
+document.getElementById("indicador").innerText =
+(paginaActual+1)+" / "+pag
