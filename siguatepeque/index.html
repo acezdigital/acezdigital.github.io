@@ -11,6 +11,7 @@
 
 body{
 margin:0;
+font-family:Arial, Helvetica, sans-serif;
 background:#0b1c2c;
 display:flex;
 justify-content:center;
@@ -18,8 +19,8 @@ justify-content:center;
 
 .portal{
 position:relative;
-width:1080px;
-max-width:100%;
+max-width:1080px;
+width:100%;
 }
 
 .portal img{
@@ -27,49 +28,61 @@ width:100%;
 display:block;
 }
 
-/* BOTONES INVISIBLES */
+/* BOTONES */
 
-.boton{
+.botones{
 position:absolute;
-width:335px;
-height:70px;
+top:460px;
+left:50%;
+transform:translateX(-50%);
+display:grid;
+grid-template-columns:repeat(2, 340px);
+gap:28px 120px;
 }
 
-/* IZQUIERDA */
+/* ESTILO BOTONES */
 
-.historia{top:520px;left:130px;}
-.geografia{top:630px;left:130px;}
-.cultura{top:740px;left:130px;}
-.educacion{top:850px;left:130px;}
+.botones a{
+text-decoration:none;
+text-align:center;
+padding:15px;
+border:2px solid white;
+border-radius:40px;
+color:white;
+font-size:20px;
+font-weight:bold;
+letter-spacing:1px;
+background:rgba(0,0,0,0.35);
+transition:0.25s;
+}
 
-/* DERECHA */
-
-.economia{top:520px;right:130px;}
-.turismo{top:630px;right:130px;}
-.galeria{top:740px;right:130px;}
-.informacion{top:850px;right:130px;}
+.botones a:hover{
+background:white;
+color:#0b1c2c;
+}
 
 /* WHATSAPP */
 
 .whatsapp{
 position:absolute;
 top:25px;
-right:120px;
+right:95px;
 width:300px;
-height:70px;
+height:65px;
 }
 
 /* CORREO */
 
 .correo{
 position:absolute;
-bottom:40px;
+bottom:35px;
 right:120px;
 width:430px;
-height:70px;
+height:65px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -78,22 +91,26 @@ height:70px;
 
 <img src="WebSigua.webp">
 
-<!-- BOTONES -->
+<div class="botones">
 
-<a class="boton historia" href="historia.html"></a>
-<a class="boton geografia" href="geografia.html"></a>
-<a class="boton cultura" href="cultura.html"></a>
-<a class="boton educacion" href="educacion.html"></a>
+<a href="historia.html">Historia</a>
+<a href="economia.html">Economía</a>
 
-<a class="boton economia" href="economia.html"></a>
-<a class="boton turismo" href="turismo.html"></a>
-<a class="boton galeria" href="galeria.html"></a>
-<a class="boton informacion" href="informacion.html"></a>
+<a href="geografia.html">Geografía</a>
+<a href="turismo.html">Turismo</a>
+
+<a href="cultura.html">Cultura</a>
+<a href="galeria.html">Galería</a>
+
+<a href="educacion.html">Educación</a>
+<a href="informacion.html">Información</a>
+
+</div>
 
 <!-- WHATSAPP -->
 
 <a class="whatsapp"
-href="https://wa.me/50433661836?text=Hola%20me%20podria%20brindar%20mas%20informacion%20sobre%20sus%20servicios%20digitales"
+href="https://wa.me/50433661836?text=Hola%20me%20podría%20brindar%20más%20información%20sobre%20sus%20servicios%20digitales"
 target="_blank"></a>
 
 <!-- CORREO -->
