@@ -2,11 +2,16 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ACEZ Digital</title>
+
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<!-- PRECARGA DEL FONDO -->
+<link rel="preload" as="image" href="FondoWebACEZ.webp">
 
 <style>
 
@@ -21,11 +26,28 @@ font-family:Arial, Helvetica, sans-serif;
 /* FONDO */
 
 body{
+background:#0b1c2c;
 background-image:url("FondoWebACEZ.webp");
 background-position:center;
 background-size:cover;
 background-repeat:no-repeat;
-background-color:#0b1c2c;
+
+opacity:0;
+animation:entrada 0.6s ease forwards;
+}
+
+/* ANIMACIÓN DE ENTRADA */
+
+@keyframes entrada{
+
+from{
+opacity:0;
+}
+
+to{
+opacity:1;
+}
+
 }
 
 /* ZONAS CLICABLES */
@@ -76,15 +98,32 @@ height:8%;
 /* PANEL CATÁLOGOS */
 
 #panelCatalogos{
+
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
+
 background:rgba(11,28,44,0.96);
-display:none;
+
+display:flex;
 flex-direction:column;
+
+opacity:0;
+visibility:hidden;
+
+transition:opacity .4s ease;
+
 z-index:9999;
+
+}
+
+/* PANEL ACTIVO */
+
+#panelCatalogos.activo{
+opacity:1;
+visibility:visible;
 }
 
 /* BOTÓN CERRAR */
@@ -110,12 +149,19 @@ font-size:28px;
 /* CONTENEDOR NETFLIX */
 
 .catalogos{
+
 display:flex;
+
 gap:25px;
+
 overflow-x:auto;
+
 padding:40px;
+
 margin-top:20px;
+
 scroll-behavior:smooth;
+
 }
 
 /* OCULTAR SCROLL */
@@ -127,16 +173,25 @@ display:none;
 /* TARJETAS */
 
 .catalogo-card{
+
 min-width:220px;
+
 text-decoration:none;
+
 color:white;
+
 transition:transform .35s ease;
+
 }
 
 .catalogo-card img{
+
 width:100%;
+
 border-radius:10px;
+
 box-shadow:0 10px 20px rgba(0,0,0,0.5);
+
 }
 
 .catalogo-card:hover{
@@ -144,22 +199,35 @@ transform:scale(1.08);
 }
 
 .catalogo-card p{
+
 text-align:center;
+
 margin-top:10px;
+
 font-size:15px;
+
 }
 
 /* FLECHAS */
 
 .flecha{
+
 position:absolute;
+
 top:50%;
+
 transform:translateY(-50%);
+
 font-size:40px;
+
 color:white;
+
 cursor:pointer;
+
 padding:10px;
+
 z-index:10;
+
 }
 
 .flecha:hover{
@@ -175,6 +243,7 @@ right:10px;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -183,20 +252,21 @@ right:10px;
 
 <a class="link whatsapp"
 href="https://wa.me/50433661836?text=Hola,%20¿me%20podría%20brindar%20más%20información%20sobre%20sus%20servicios%20digitales?"
-target="_blank"
-title="WhatsApp"></a>
+target="_blank"></a>
+
 
 <!-- VER CATÁLOGOS -->
 
 <a class="link catalogo"
-onclick="abrirCatalogos()"
-title="Ver catálogo"></a>
+onclick="abrirCatalogos()"></a>
+
 
 <!-- CORREO -->
 
 <a class="link correo"
-href="mailto:acezdigita@gmail.com"
-title="Correo electrónico"></a>
+href="mailto:acezdigita@gmail.com"></a>
+
+
 
 <!-- PANEL DE CATÁLOGOS -->
 
@@ -208,12 +278,15 @@ title="Correo electrónico"></a>
 Catálogos Digitales
 </div>
 
+
 <!-- FLECHAS -->
 
 <div class="flecha izq" onclick="moverCatalogo(-300)">❮</div>
 <div class="flecha der" onclick="moverCatalogo(300)">❯</div>
 
+
 <div class="catalogos" id="contenedorCatalogos">
+
 
 <!-- SIGUA STICKERS -->
 
@@ -226,6 +299,7 @@ href="https://acezdigital.github.io/catalogos/siguastickers/">
 
 </a>
 
+
 <!-- HOMBRES DE VALOR -->
 
 <a class="catalogo-card"
@@ -237,23 +311,31 @@ href="https://acezdigital.github.io/catalogos/hombresdevalor/">
 
 </a>
 
+
 </div>
 
 </div>
+
+
 
 <script>
 
+const panel=document.getElementById("panelCatalogos");
+
 function abrirCatalogos(){
 
-document.getElementById("panelCatalogos").style.display="flex";
+panel.classList.add("activo");
 
 }
 
 function cerrarCatalogos(){
 
-document.getElementById("panelCatalogos").style.display="none";
+panel.classList.remove("activo");
 
 }
+
+
+/* SCROLL CARRUSEL */
 
 function moverCatalogo(valor){
 
@@ -264,7 +346,30 @@ behavior:"smooth"
 
 }
 
+
+/* CERRAR CON ESC */
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="Escape"){
+cerrarCatalogos();
+}
+
+});
+
+
+/* CERRAR CLIC FUERA */
+
+panel.addEventListener("click",function(e){
+
+if(e.target===panel){
+cerrarCatalogos();
+}
+
+});
+
 </script>
+
 
 </body>
 
