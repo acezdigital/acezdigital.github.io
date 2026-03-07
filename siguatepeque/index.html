@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -18,94 +17,91 @@ justify-content:center;
 }
 
 .portal{
-max-width:1080px;
-width:100%;
+position:relative;
+width:1080px;
+max-width:100%;
 }
 
 .portal img{
 width:100%;
-height:auto;
 display:block;
 }
 
-</style>
+/* BOTONES INVISIBLES */
 
+.boton{
+position:absolute;
+width:335px;
+height:70px;
+}
+
+/* IZQUIERDA */
+
+.historia{top:520px;left:130px;}
+.geografia{top:630px;left:130px;}
+.cultura{top:740px;left:130px;}
+.educacion{top:850px;left:130px;}
+
+/* DERECHA */
+
+.economia{top:520px;right:130px;}
+.turismo{top:630px;right:130px;}
+.galeria{top:740px;right:130px;}
+.informacion{top:850px;right:130px;}
+
+/* WHATSAPP */
+
+.whatsapp{
+position:absolute;
+top:25px;
+right:120px;
+width:300px;
+height:70px;
+}
+
+/* CORREO */
+
+.correo{
+position:absolute;
+bottom:40px;
+right:120px;
+width:430px;
+height:70px;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="portal">
 
-<img src="WebSigua.webp" usemap="#mapaPortal">
+<img src="WebSigua.webp">
 
+<!-- BOTONES -->
 
-<map name="mapaPortal">
+<a class="boton historia" href="historia.html"></a>
+<a class="boton geografia" href="geografia.html"></a>
+<a class="boton cultura" href="cultura.html"></a>
+<a class="boton educacion" href="educacion.html"></a>
+
+<a class="boton economia" href="economia.html"></a>
+<a class="boton turismo" href="turismo.html"></a>
+<a class="boton galeria" href="galeria.html"></a>
+<a class="boton informacion" href="informacion.html"></a>
 
 <!-- WHATSAPP -->
 
-<area shape="rect"
-coords="680,20,1030,110"
-href="https://wa.me/50433661836?text=Hola,%20me%20podría%20brindar%20más%20información%20sobre%20sus%20servicios%20digitales."
-target="_blank">
-
-<!-- HISTORIA -->
-
-<area shape="rect"
-coords="120,520,455,590"
-href="historia.html">
-
-<!-- GEOGRAFIA -->
-
-<area shape="rect"
-coords="120,630,455,700"
-href="geografia.html">
-
-<!-- CULTURA -->
-
-<area shape="rect"
-coords="120,740,455,810"
-href="cultura.html">
-
-<!-- EDUCACION -->
-
-<area shape="rect"
-coords="120,850,455,920"
-href="educacion.html">
-
-<!-- ECONOMIA -->
-
-<area shape="rect"
-coords="625,520,960,590"
-href="economia.html">
-
-<!-- TURISMO -->
-
-<area shape="rect"
-coords="625,630,960,700"
-href="turismo.html">
-
-<!-- GALERIA -->
-
-<area shape="rect"
-coords="625,740,960,810"
-href="galeria.html">
-
-<!-- INFORMACION -->
-
-<area shape="rect"
-coords="625,850,960,920"
-href="informacion.html">
+<a class="whatsapp"
+href="https://wa.me/50433661836?text=Hola%20me%20podria%20brindar%20mas%20informacion%20sobre%20sus%20servicios%20digitales"
+target="_blank"></a>
 
 <!-- CORREO -->
 
-<area shape="rect"
-coords="560,1580,1000,1660"
-href="mailto:acezdigita@gmail.com?subject=Información&body=Hola,%20me%20gustaría%20recibir%20más%20información%20sobre%20sus%20servicios.">
-
-</map>
+<a class="correo"
+href="mailto:acezdigita@gmail.com"></a>
 
 </div>
 
 </body>
-
-</html
+</html>
