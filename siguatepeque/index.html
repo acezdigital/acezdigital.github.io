@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 
 <meta charset="UTF-8">
@@ -12,20 +11,26 @@
 
 body{
 margin:0;
-font-family:Arial, Helvetica, sans-serif;
+overflow:hidden;
 background:#0b1c2c;
 display:flex;
 justify-content:center;
+align-items:center;
+height:100vh;
+font-family:Arial;
 }
+
+/* CONTENEDOR */
 
 .portal{
 position:relative;
-max-width:1080px;
-width:100%;
+height:100vh;
 }
 
+/* IMAGEN */
+
 .portal img{
-width:100%;
+height:100vh;
 display:block;
 }
 
@@ -33,27 +38,29 @@ display:block;
 
 .botones{
 position:absolute;
-top:430px;
+top:42%;
 left:50%;
-transform:translateX(-50%);
+transform:translate(-50%,-50%);
 display:grid;
-grid-template-columns:repeat(2, 250px);
-gap:25px 90px;
+grid-template-columns:repeat(2, 190px);
+gap:18px 70px;
 }
 
-/* BOTONES */
+/* ESTILO BOTONES */
 
 .botones a{
+
 text-decoration:none;
 text-align:center;
-padding:12px;
+padding:8px;
 border:2px solid white;
-border-radius:35px;
+border-radius:30px;
 color:white;
-font-size:18px;
+font-size:14px;
 font-weight:bold;
 background:rgba(0,0,0,0.45);
 transition:0.25s;
+
 }
 
 .botones a:hover{
@@ -65,20 +72,20 @@ color:#0b1c2c;
 
 .whatsapp{
 position:absolute;
-top:28px;
-right:110px;
-width:260px;
-height:60px;
+top:3%;
+right:7%;
+width:200px;
+height:55px;
 }
 
 /* CORREO */
 
 .correo{
 position:absolute;
-bottom:35px;
-right:140px;
-width:400px;
-height:60px;
+bottom:3%;
+right:8%;
+width:330px;
+height:55px;
 }
 
 </style>
