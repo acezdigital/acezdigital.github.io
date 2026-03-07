@@ -5,228 +5,120 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ACEZ Digital</title>
-<link rel="icon" type="image/x-icon" href="favicon.ico">
+<title>Siguatepeque | ACEZ Digital</title>
+
 <style>
 
-html,body{
-margin:0;
-padding:0;
-height:100%;
-overflow:hidden;
-font-family:Arial, Helvetica, sans-serif;
-}
-
-/* FONDO */
-
 body{
-background-image:url("FondoWebACEZ.webp");
-background-position:center;
-background-size:contain;
-background-repeat:no-repeat;
-background-color:#0b1c2c;
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#0b1c2c;
+display:flex;
+justify-content:center;
 }
-  
-.subCatalogos{
-font-size:12px;
-opacity:0.7;
+
+.portal{
+position:relative;
+max-width:1080px;
+width:100%;
+}
+
+.portal img{
+width:100%;
 display:block;
-margin-top:3px;
-}  
+}
 
-/* ZONAS CLICABLES */
+/* BOTONES */
 
-.link{
+.botones{
 position:absolute;
-display:block;
-cursor:pointer;
-transition:transform 0.20s ease, filter 0.20s ease;
+top:460px;
+left:50%;
+transform:translateX(-50%);
+display:grid;
+grid-template-columns:repeat(2, 340px);
+gap:28px 120px;
 }
 
-.link:hover{
-transform:scale(1.02);
-filter:brightness(1.08);
+/* ESTILO BOTONES */
+
+.botones a{
+text-decoration:none;
+text-align:center;
+padding:15px;
+border:2px solid white;
+border-radius:40px;
+color:white;
+font-size:20px;
+font-weight:bold;
+letter-spacing:1px;
+background:rgba(0,0,0,0.35);
+transition:0.25s;
 }
 
-.link:active{
-transform:scale(0.98);
+.botones a:hover{
+background:white;
+color:#0b1c2c;
 }
 
 /* WHATSAPP */
 
 .whatsapp{
-top:2%;
-right:6%;
-width:28%;
-height:8%;
-}
-
-/* VER CATÁLOGOS */
-
-.catalogo{
-top:26%;
-left:6%;
-width:36%;
-height:12%;
+position:absolute;
+top:25px;
+right:95px;
+width:300px;
+height:65px;
 }
 
 /* CORREO */
 
 .correo{
-bottom:4%;
-right:6%;
-width:28%;
-height:8%;
-}
-
-/* PANEL CATÁLOGOS */
-
-#panelCatalogos{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:#0b1c2c;
-display:none;
-flex-direction:column;
-z-index:9999;
-}
-
-/* BOTÓN CERRAR */
-
-.cerrar{
 position:absolute;
-top:20px;
-right:25px;
-font-size:30px;
-color:white;
-cursor:pointer;
-}
-
-/* TÍTULO */
-
-.tituloCatalogos{
-color:white;
-text-align:center;
-margin-top:40px;
-font-size:28px;
-}
-
-/* CONTENEDOR NETFLIX */
-
-.catalogos{
-display:flex;
-gap:25px;
-overflow-x:auto;
-padding:40px;
-margin-top:20px;
-}
-
-/* TARJETAS */
-
-.catalogo-card{
-min-width:220px;
-text-decoration:none;
-color:white;
-transition:transform .35s ease;
-}
-
-.catalogo-card img{
-width:100%;
-border-radius:10px;
-box-shadow:0 10px 20px rgba(0,0,0,0.5);
-}
-
-.catalogo-card:hover{
-transform:scale(1.08);
-}
-
-.catalogo-card p{
-text-align:center;
-margin-top:10px;
-font-size:15px;
+bottom:35px;
+right:120px;
+width:430px;
+height:65px;
 }
 
 </style>
+
 </head>
 
 <body>
 
+<div class="portal">
+
+<img src="WebSigua.webp">
+
+<div class="botones">
+
+<a href="historia.html">Historia</a>
+<a href="economia.html">Economía</a>
+
+<a href="geografia.html">Geografía</a>
+<a href="turismo.html">Turismo</a>
+
+<a href="cultura.html">Cultura</a>
+<a href="galeria.html">Galería</a>
+
+<a href="educacion.html">Educación</a>
+<a href="informacion.html">Información</a>
+
+</div>
+
 <!-- WHATSAPP -->
 
-<a class="link whatsapp"
-href="https://wa.me/50433661836?text=Hola,%20¿me%20podría%20brindar%20más%20información%20sobre%20sus%20servicios%20digitales?"
-target="_blank"
-title="WhatsApp"></a>
-
-<!-- VER CATÁLOGOS -->
-
-<a class="link catalogo"
-onclick="abrirCatalogos()"
-title="Ver catálogo"></a>
+<a class="whatsapp"
+href="https://wa.me/50433661836?text=Hola%20me%20podría%20brindar%20más%20información%20sobre%20sus%20servicios%20digitales"
+target="_blank"></a>
 
 <!-- CORREO -->
 
-<a class="link correo"
-href="mailto:acezdigita@gmail.com"
-title="Correo electrónico"></a>
-
-<!-- PANEL DE CATÁLOGOS -->
-
-<div id="panelCatalogos">
-
-<div class="cerrar" onclick="cerrarCatalogos()">✕</div>
-
-<div class="tituloCatalogos">
-Catálogos Digitales<br>
-<span class="subCatalogos">Clic o desliza para ver</span>
-</div>
-
-<div class="catalogos">
-
-<!-- SIGUA STICKERS -->
-
-<a class="catalogo-card"
-href="https://acezdigital.github.io/catalogos/siguastickers/">
-
-<img src="catalogos/siguastickers/1Cel.webp">
-
-<p>Sigua Stickers</p>
-
-</a>
-
-<!-- HOMBRES DE VALOR -->
-
-<a class="catalogo-card"
-href="https://acezdigital.github.io/catalogos/hombresdevalor/">
-
-<img src="catalogos/hombresdevalor/1.webp">
-
-<p>Hombres de Valor</p>
-
-</a>
+<a class="correo"
+href="mailto:acezdigita@gmail.com"></a>
 
 </div>
-
-</div>
-
-<script>
-
-function abrirCatalogos(){
-
-document.getElementById("panelCatalogos").style.display="flex";
-
-}
-
-function cerrarCatalogos(){
-
-document.getElementById("panelCatalogos").style.display="none";
-
-}
-
-</script>
 
 </body>
-
 </html>
