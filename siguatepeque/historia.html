@@ -1,13 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Siguatepeque | Historia</title>
+<title>Historia de Siguatepeque</title>
 
 <style>
 
-/* CONFIGURACIÓN GENERAL */
+/* FONDO */
 
 body{
 margin:0;
@@ -26,73 +29,96 @@ background:rgba(10,20,30,0.65);
 min-height:100vh;
 }
 
+/* BOTÓN MENU */
+
+.menu-btn{
+
+position:fixed;
+top:20px;
+left:20px;
+font-size:18px;
+background:rgba(0,0,0,0.4);
+padding:10px 18px;
+border-radius:20px;
+cursor:pointer;
+z-index:1001;
+
+}
+
+/* PANEL MENU */
+
+.menu-panel{
+
+position:fixed;
+top:0;
+left:-260px;
+width:260px;
+height:100%;
+background:rgba(0,0,0,0.85);
+transition:0.4s;
+padding-top:60px;
+z-index:1000;
+
+}
+
+.menu-panel a{
+
+display:block;
+color:white;
+text-decoration:none;
+padding:15px 30px;
+font-size:16px;
+border-bottom:1px solid rgba(255,255,255,0.1);
+
+}
+
+.menu-panel a:hover{
+
+background:#1f7bd1;
+
+}
+
+.menu-panel.active{
+
+left:0;
+
+}
+
 /* ENCABEZADO */
 
-header{
+.header{
 
 text-align:center;
-padding:30px;
-background:rgba(0,0,0,0.35);
-backdrop-filter:blur(6px);
+padding:80px 20px 30px 20px;
 
 }
 
-header h1{
+.header h1{
+
 margin:0;
 font-size:42px;
-letter-spacing:2px;
+
 }
 
-header p{
+.header p{
+
 margin-top:6px;
 font-size:18px;
 color:#8fd3ff;
-}
-
-/* MENÚ */
-
-.menu{
-
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:14px;
-padding:18px;
-background:rgba(0,0,0,0.25);
-backdrop-filter:blur(8px);
 
 }
 
-.menu a{
-
-text-decoration:none;
-color:white;
-padding:10px 22px;
-border-radius:25px;
-font-size:15px;
-background:rgba(30,90,150,0.55);
-transition:0.3s;
-
-}
-
-.menu a:hover{
-
-background:rgba(60,160,255,0.9);
-transform:translateY(-2px);
-
-}
-
-/* CONTENEDOR PRINCIPAL */
+/* CONTENEDOR */
 
 .contenedor{
 
 max-width:900px;
 margin:auto;
-padding:40px 25px;
+padding:30px;
 
 }
 
-/* TARJETAS DE HISTORIA */
+/* TARJETAS */
 
 .historia{
 
@@ -104,8 +130,6 @@ margin-bottom:30px;
 
 }
 
-/* TITULOS */
-
 .historia h2{
 
 margin-top:0;
@@ -115,40 +139,10 @@ padding-bottom:6px;
 
 }
 
-/* PÁRRAFOS */
-
 .historia p{
 
 font-size:18px;
 line-height:1.7;
-color:#f2f2f2;
-
-}
-
-/* BOTÓN VOLVER */
-
-.volver{
-
-text-align:center;
-margin-top:40px;
-
-}
-
-.volver a{
-
-text-decoration:none;
-background:rgba(40,120,200,0.7);
-padding:12px 30px;
-border-radius:30px;
-color:white;
-font-size:16px;
-transition:0.3s;
-
-}
-
-.volver a:hover{
-
-background:#2ea3ff;
 
 }
 
@@ -159,7 +153,6 @@ footer{
 text-align:center;
 padding:20px;
 background:rgba(0,0,0,0.35);
-font-size:14px;
 
 }
 
@@ -171,18 +164,16 @@ font-size:14px;
 
 <div class="overlay">
 
-<header>
+<!-- BOTÓN MENU -->
 
-<h1>SIGUATEPEQUE</h1>
-<p>Historia de la ciudad del corazón de Honduras</p>
+<div class="menu-btn" onclick="abrirMenu()">☰ MENÚ</div>
 
-</header>
+<!-- PANEL MENU -->
 
-<!-- MENÚ -->
-
-<div class="menu">
+<div id="menuPanel" class="menu-panel">
 
 <a href="index.html">Inicio</a>
+<a href="historia.html">Historia</a>
 <a href="geografia.html">Geografía</a>
 <a href="economia.html">Economía</a>
 <a href="turismo.html">Turismo</a>
@@ -193,32 +184,37 @@ font-size:14px;
 
 </div>
 
+<!-- ENCABEZADO -->
+
+<div class="header">
+
+<h1>Historia de Siguatepeque</h1>
+<p>Siguatepeque, el corazón de Honduras</p>
+
+</div>
+
 <div class="contenedor">
 
 <div class="historia">
 
-<h2>Orígenes prehispánicos</h2>
+<h2>Orígenes antiguos</h2>
 
 <p>
-La historia de Siguatepeque se remonta a tiempos prehispánicos. Antes de la llegada de los españoles, la región estaba habitada por pueblos indígenas de origen lenca que se asentaron en las fértiles tierras cercanas a riachuelos y montañas que rodean la ciudad.
+La historia de Siguatepeque se remonta a tiempos prehispánicos. Antes de la llegada de los españoles, la región estaba habitada por pueblos indígenas de origen lenca que se establecieron en las fértiles tierras cercanas a riachuelos y montañas que rodean la ciudad.
 </p>
 
 <p>
-Según el historiador comayagüense Felipe Castillo, Siguatepeque no fue fundada sino descubierta, ya que cuando los españoles llegaron al territorio encontraron una pequeña población indígena asentada desde mucho tiempo atrás.
+Según el historiador comayagüense Felipe Castillo, Siguatepeque no fue fundada sino descubierta, ya que cuando los españoles llegaron encontraron una pequeña población indígena asentada en la zona.
 </p>
 
 </div>
 
 <div class="historia">
 
-<h2>Encuentro con los españoles</h2>
+<h2>El encuentro con los españoles</h2>
 
 <p>
-El 7 de diciembre de 1537 el adelantado Alonso de Cáceres recorrió el poblado junto a sus huestes españolas. Durante su recorrido encontró comunidades indígenas asentadas en las faldas del cerro Calanterique y en las sabanas cercanas a los riachuelos Güique y Guaratoro.
-</p>
-
-<p>
-Este encuentro marcó el inicio de una nueva etapa en la historia de la región, donde las culturas indígenas y la colonización española comenzarían a entrelazarse.
+El 7 de diciembre de 1537 el adelantado Alonso de Cáceres recorrió la región junto a sus tropas españolas. Durante su recorrido encontró comunidades indígenas asentadas en las faldas del cerro Calanterique y en las cercanías de los riachuelos Güique y Guaratoro.
 </p>
 
 </div>
@@ -228,39 +224,7 @@ Este encuentro marcó el inicio de una nueva etapa en la historia de la región,
 <h2>Vestigios arqueológicos</h2>
 
 <p>
-A lo largo del tiempo se han encontrado diversos vestigios arqueológicos que evidencian la presencia de los antiguos pobladores. Entre los objetos hallados destacan piedras de moler, vasijas, jarrones, ollas y utensilios utilizados para la vida cotidiana.
-</p>
-
-<p>
-También se han encontrado imágenes de ídolos y piezas decorativas pertenecientes a las culturas maya y lenca. Muchos de estos vestigios fueron descubiertos durante el crecimiento urbano de la ciudad, especialmente en sectores comprendidos entre El Carmen, Santa Marta y el cerro Calanterique.
-</p>
-
-</div>
-
-<div class="historia">
-
-<h2>Formación del poblado</h2>
-
-<p>
-Se cree que el poblado fue organizado formalmente alrededor del año 1689 por comunidades indígenas de origen lenca. Con el paso del tiempo el asentamiento comenzó a crecer y a consolidarse dentro de la región central de Honduras.
-</p>
-
-<p>
-Para el año 1788 Siguatepeque formaba parte de un curato compuesto por varias cofradías y contaba con aldeas como Jaitique, Meámbar y Taulabé.
-</p>
-
-</div>
-
-<div class="historia">
-
-<h2>Crecimiento y llegada de inmigrantes</h2>
-
-<p>
-Con la apertura de caminos comenzaron a llegar familias provenientes de distintas regiones del país y también del extranjero. Entre ellas destacaron familias de Alemania, Italia, Inglaterra, Canadá, Palestina y España.
-</p>
-
-<p>
-Estas familias contribuyeron al desarrollo comercial, agrícola y ganadero del municipio, impulsando el crecimiento económico y urbano de Siguatepeque.
+Diversos hallazgos arqueológicos demuestran la presencia de antiguos pobladores. Entre los objetos encontrados destacan piedras de moler, vasijas, jarrones, ollas y utensilios utilizados en la vida cotidiana de las culturas maya y lenca.
 </p>
 
 </div>
@@ -270,11 +234,7 @@ Estas familias contribuyeron al desarrollo comercial, agrícola y ganadero del m
 <h2>Reconocimiento como ciudad</h2>
 
 <p>
-El crecimiento poblacional y económico llevó al Congreso Nacional de Honduras a elevar a Siguatepeque a la categoría de ciudad el 9 de abril de 1926 mediante el Decreto 122.
-</p>
-
-<p>
-Este reconocimiento se realizó durante el gobierno del presidente Miguel Paz Barahona, quien reconoció la importancia económica y geográfica que el municipio había alcanzado.
+El crecimiento económico y poblacional llevó al Congreso Nacional de Honduras a elevar a Siguatepeque a la categoría de ciudad el 9 de abril de 1926 mediante el Decreto 122 durante el gobierno del presidente Miguel Paz Barahona.
 </p>
 
 </div>
@@ -284,18 +244,8 @@ Este reconocimiento se realizó durante el gobierno del presidente Miguel Paz Ba
 <h2>Siguatepeque en la actualidad</h2>
 
 <p>
-Con el paso del tiempo el antiguo poblado indígena se transformó en una ciudad moderna y dinámica. Hoy Siguatepeque destaca por su clima agradable, su crecimiento comercial y su ubicación estratégica en el centro de Honduras.
+Hoy Siguatepeque es una ciudad dinámica y en constante crecimiento, reconocida por su clima agradable, su actividad comercial y su posición estratégica en el centro de Honduras.
 </p>
-
-<p>
-La ciudad continúa desarrollándose y atrayendo a personas de distintas regiones del país y del extranjero, consolidándose como uno de los centros urbanos más importantes de la región central.
-</p>
-
-</div>
-
-<div class="volver">
-
-<a href="index.html">← Volver al inicio</a>
 
 </div>
 
@@ -303,11 +253,21 @@ La ciudad continúa desarrollándose y atrayendo a personas de distintas regione
 
 <footer>
 
-Siguatepeque por: Augusto César Zelaya R  • ACEZ Digital
+Portal de Siguatepeque • ACEZ Digital
 
 </footer>
 
 </div>
+
+<script>
+
+function abrirMenu(){
+
+document.getElementById("menuPanel").classList.toggle("active");
+
+}
+
+</script>
 
 </body>
 </html>
