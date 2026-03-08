@@ -364,12 +364,24 @@ mostrar();
 
 </script>
 
-<audio autoplay loop id="musica">
+<audio id="musica" loop>
 <source src="musica.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-document.getElementById("musica").volume = 0.15;
+
+const musica = document.getElementById("musica");
+musica.volume = 0.15;
+
+/* iniciar musica cuando el usuario toque la pantalla */
+
+document.addEventListener("touchstart", iniciarMusica, {once:true});
+document.addEventListener("click", iniciarMusica, {once:true});
+
+function iniciarMusica(){
+musica.play();
+}
+
 </script>
 
 </body>
