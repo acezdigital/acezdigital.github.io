@@ -1,33 +1,26 @@
-html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Siguatepeque</title>
+<title>Portal de Siguatepeque</title>
 
 <style>
 
-html,body{
+body{
 margin:0;
-height:100%;
-font-family:Arial, Helvetica, sans-serif;
-background:url("../Fondoweb.webp") center center / cover no-repeat fixed;
-overflow:hidden;
+font-family:Arial;
+background:url("Fondoweb.webp") center/cover no-repeat fixed;
 }
 
 /* HEADER */
 
 .header{
-position:fixed;
-top:0;
-width:100%;
-background:#1f2937;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:10px 15px;
-border-bottom:2px solid #3b82f6;
-z-index:1000;
+background:#1f2937;
+padding:10px;
 }
 
 .logo{
@@ -37,75 +30,29 @@ height:40px;
 .whatsapp{
 background:#25D366;
 color:white;
-padding:8px 16px;
+padding:8px 14px;
 border-radius:20px;
 text-decoration:none;
-font-weight:bold;
-transition:0.3s;
 }
 
-.whatsapp:hover{
-transform:scale(1.05);
-box-shadow:0 0 10px rgba(0,0,0,0.5);
-}
+/* BOTONES */
 
-/* MENU */
-
-.menu-btn{
-font-size:24px;
-color:white;
-cursor:pointer;
-}
-
-.menu{
-position:fixed;
-top:0;
-left:-260px;
-width:260px;
-height:100%;
-background:#111827;
-transition:0.3s;
-padding-top:60px;
-z-index:1200;
-}
-
-.menu a{
-display:block;
-color:white;
-padding:15px;
-text-decoration:none;
-border-bottom:1px solid rgba(255,255,255,0.1);
-}
-
-.menu a:hover{
-background:#1f2937;
-}
-
-.menu.active{
-left:0;
-}
-
-/* VISOR */
-
-#visor{
-position:absolute;
-top:80px;
-bottom:80px;
-left:0;
-right:0;
+.portal{
 display:flex;
-justify-content:center;
+flex-direction:column;
 align-items:center;
+margin-top:120px;
+gap:12px;
 }
 
-#revista{
-width:92%;
-max-width:460px;
-border-radius:14px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+.portal a{
+background:white;
+padding:10px 20px;
+border-radius:8px;
+text-decoration:none;
+color:black;
+font-weight:bold;
 }
-
-/* FOOTER */
 
 .footer{
 position:fixed;
@@ -115,13 +62,6 @@ background:#1f2937;
 color:white;
 text-align:center;
 padding:10px;
-border-top:2px solid #3b82f6;
-}
-
-.footer a{
-color:#22c55e;
-text-decoration:none;
-font-weight:bold;
 }
 
 </style>
@@ -131,54 +71,31 @@ font-weight:bold;
 
 <div class="header">
 
-<span class="menu-btn" onclick="toggleMenu()">☰</span>
-
 <img src="../ACEZdigital.png" class="logo">
 
 <a class="whatsapp"
-href="https://wa.me/50433661836?text=Hola,%20quisiera%20información%20sobre%20sus%20servicios%20digitales"
-target="_blank">
+href="https://wa.me/50433661836?text=Hola,%20quisiera%20información%20sobre%20sus%20servicios">
 WhatsApp
 </a>
 
 </div>
 
-<div class="menu" id="menu">
+<div class="portal">
 
-<a href="../">Inicio</a>
-<a href="../historia/">Historia</a>
-<a href="../geografia/">Geografía</a>
-<a href="../economia/">Economía</a>
-<a href="../cultura/">Cultura</a>
-<a href="../educacion/">Educación</a>
-<a href="../turismo/">Turismo</a>
-<a href="../galeria/">Galería</a>
-<a href="../informacion/">Información</a>
-
-</div>
-
-<div id="visor">
-
-<img id="revista" src="1.webp">
+<a href="historia/">Historia</a>
+<a href="geografia/">Geografía</a>
+<a href="economia/">Economía</a>
+<a href="cultura/">Cultura</a>
+<a href="educacion/">Educación</a>
+<a href="turismo/">Turismo</a>
+<a href="galeria/">Galería</a>
+<a href="informacion/">Información</a>
 
 </div>
 
 <div class="footer">
-
-Correo electrónico  
-<a href="mailto:acezdigita@gmail.com">
-acesdigita@gmail.com
-</a>
-
+Correo: acesdigita@gmail.com
 </div>
-
-<script>
-
-function toggleMenu(){
-document.getElementById("menu").classList.toggle("active");
-}
-
-</script>
 
 </body>
 </html>
