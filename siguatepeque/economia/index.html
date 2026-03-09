@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Siguatepeque</title>
 
 <style>
+
+/* GENERAL */
 
 html,body{
 margin:0;
@@ -16,47 +20,22 @@ background:url("../Fondoweb.webp") center center / cover no-repeat fixed;
 overflow:hidden;
 }
 
-/* HEADER */
+/* BOTON MENU FLOTANTE */
 
-.header{
-position:fixed;
-top:0;
-width:100%;
-background:#1f2937;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 15px;
-border-bottom:2px solid #3b82f6;
-z-index:1000;
-}
-
-.logo{
-height:40px;
-}
-
-.whatsapp{
-background:#25D366;
+.menu-btn{
+position:absolute;
+top:120px;
+left:15px;
+font-size:26px;
 color:white;
-padding:8px 16px;
-border-radius:20px;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-}
-
-.whatsapp:hover{
-transform:scale(1.05);
-box-shadow:0 0 10px rgba(0,0,0,0.5);
+cursor:pointer;
+z-index:2000;
+background:rgba(0,0,0,0.4);
+padding:8px 12px;
+border-radius:8px;
 }
 
 /* MENU */
-
-.menu-btn{
-font-size:24px;
-color:white;
-cursor:pointer;
-}
 
 .menu{
 position:fixed;
@@ -90,59 +69,81 @@ left:0;
 
 #visor{
 position:absolute;
-top:80px;
-bottom:80px;
+top:140px;
+bottom:90px;
 left:0;
 right:0;
 display:flex;
 justify-content:center;
 align-items:center;
+touch-action:pan-x;
 }
 
 #revista{
-width:92%;
+width:96%;
 max-width:460px;
-border-radius:14px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+border-radius:12px;
+pointer-events:none;
 }
 
-/* FOOTER */
+/* INDICADOR */
 
-.footer{
-position:fixed;
-bottom:0;
-width:100%;
-background:#1f2937;
+#indicador{
+position:absolute;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,0.6);
 color:white;
-text-align:center;
-padding:10px;
-border-top:2px solid #3b82f6;
+padding:4px 10px;
+border-radius:10px;
+font-size:13px;
 }
 
-.footer a{
-color:#22c55e;
-text-decoration:none;
-font-weight:bold;
+/* FLECHAS */
+
+#flecha-izq,#flecha-der{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:30px;
+color:yellow;
+background:rgba(0,0,0,0.4);
+padding:8px 12px;
+border-radius:50%;
+cursor:pointer;
+}
+
+#flecha-izq{ left:10px; }
+#flecha-der{ right:10px; }
+
+/* ZONAS TACTILES */
+
+.whatsapp-touch{
+position:absolute;
+top:0;
+right:0;
+width:180px;
+height:70px;
+}
+
+.verweb-touch{
+position:absolute;
+bottom:0;
+right:30px;
+width:260px;
+height:70px;
+z-index:1500;
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<div class="header">
-
-<span class="menu-btn" onclick="toggleMenu()">☰</span>
-
-<img src="../ACEZdigital.png" class="logo">
-
-<a class="whatsapp"
-href="https://wa.me/50433661836?text=Hola,%20quisiera%20información%20sobre%20sus%20servicios%20digitales"
-target="_blank">
-WhatsApp
-</a>
-
-</div>
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="menu" id="menu">
 
@@ -158,26 +159,113 @@ WhatsApp
 
 </div>
 
+
 <div id="visor">
 
 <img id="revista" src="1.webp">
 
-</div>
+<div id="indicador">1 / 4</div>
 
-<div class="footer">
-
-Correo electrónico  
-<a href="mailto:acesdigita@gmail.com">
-acesdigita@gmail.com
-</a>
+<div id="flecha-izq">&#10094;</div>
+<div id="flecha-der">&#10095;</div>
 
 </div>
+
+
+<a class="whatsapp-touch"
+href="https://wa.me/50433661836?text=Hola,%20estoy%20visitando%20el%20Portal%20Digital%20de%20Siguatepeque%20y%20me%20gustaría%20obtener%20más%20información."
+target="_blank"></a>
+
+<a class="verweb-touch"
+href="https://acezdigital.com"
+target="_blank"
+title="Ver Web"></a>
+
 
 <script>
+
+/* MENU */
 
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
 }
+
+/* cerrar menu tocando fuera */
+
+document.addEventListener("click", function(event){
+
+const menu = document.getElementById("menu");
+const boton = document.querySelector(".menu-btn");
+
+if(
+menu.classList.contains("active") &&
+!menu.contains(event.target) &&
+!boton.contains(event.target)
+){
+menu.classList.remove("active");
+}
+
+});
+
+/* PAGINAS */
+
+const paginas=["1.webp","2.webp","3.webp","4.webp"];
+
+let paginaActual=0;
+
+function mostrar(){
+document.getElementById("revista").src=paginas[paginaActual];
+document.getElementById("indicador").innerText=(paginaActual+1)+" / "+paginas.length;
+}
+
+/* FLECHAS */
+
+document.getElementById("flecha-der").onclick=()=>{
+if(paginaActual<paginas.length-1){
+paginaActual++;
+mostrar();
+}
+};
+
+document.getElementById("flecha-izq").onclick=()=>{
+if(paginaActual>0){
+paginaActual--;
+mostrar();
+}
+};
+
+/* SWIPE */
+
+let startX=0;
+
+const visor=document.getElementById("visor");
+
+visor.addEventListener("touchstart",(e)=>{
+startX=e.touches[0].clientX;
+});
+
+visor.addEventListener("touchend",(e)=>{
+
+let endX=e.changedTouches[0].clientX;
+let diff=startX-endX;
+
+if(diff>40){
+if(paginaActual<paginas.length-1){
+paginaActual++;
+mostrar();
+}
+}
+
+if(diff<-40){
+if(paginaActual>0){
+paginaActual--;
+mostrar();
+}
+}
+
+});
+
+mostrar();
 
 </script>
 
