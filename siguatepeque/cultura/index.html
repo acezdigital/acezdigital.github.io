@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Siguatepeque</title>
 
 <style>
 
-html,body{
-margin:0;
+html, body{
 height:100%;
+margin:0;
 font-family:Arial, Helvetica, sans-serif;
 background:url("../Fondoweb.webp") center center / cover no-repeat fixed;
 overflow:hidden;
@@ -22,12 +21,12 @@ overflow:hidden;
 position:fixed;
 top:0;
 width:100%;
-background:#1f2937;
+background:#2f2f2f;
+padding:12px 18px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:10px 15px;
-border-bottom:2px solid #3b82f6;
+border-bottom:2px solid yellow;
 z-index:1000;
 }
 
@@ -35,13 +34,13 @@ z-index:1000;
 height:40px;
 }
 
-/* MENU */
-
 .menu-btn{
 font-size:24px;
 color:white;
 cursor:pointer;
 }
+
+/* MENU */
 
 .menu{
 position:fixed;
@@ -71,25 +70,77 @@ background:#1f2937;
 left:0;
 }
 
+/* TITULO */
+
+.titulo{
+position:absolute;
+top:80px;
+width:100%;
+text-align:center;
+color:white;
+font-size:26px;
+font-weight:bold;
+text-shadow:0 0 10px black;
+}
+
+.subtitulo{
+font-size:14px;
+color:#cbd5e1;
+}
+
 /* VISOR */
 
 #visor{
 position:absolute;
-top:80px;
+top:140px;
 bottom:80px;
 left:0;
 right:0;
 display:flex;
 justify-content:center;
-align-items:center;
+align-items:flex-start;
+touch-action:pan-x;
 }
 
 #revista{
-width:92%;
+width:96%;
 max-width:460px;
-border-radius:14px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+border-radius:12px;
+user-select:none;
+-webkit-user-drag:none;
+pointer-events:none;
 }
+
+/* INDICADOR */
+
+#indicador{
+position:absolute;
+bottom:10px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,0.6);
+color:#fff;
+padding:4px 10px;
+border-radius:10px;
+font-size:13px;
+}
+
+/* FLECHAS */
+
+#flecha-izq, #flecha-der{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:30px;
+color:yellow;
+background:rgba(0,0,0,0.4);
+padding:8px 12px;
+border-radius:50%;
+cursor:pointer;
+}
+
+#flecha-izq{ left:10px; }
+#flecha-der{ right:10px; }
 
 /* FOOTER */
 
@@ -97,14 +148,12 @@ box-shadow:0 0 20px rgba(0,0,0,0.5);
 position:fixed;
 bottom:0;
 width:100%;
-background:#1f2937;
-color:white;
-text-align:center;
-padding:10px;
-border-top:2px solid #3b82f6;
+height:70px;
+background:#2f2f2f;
+border-top:2px solid yellow;
 }
 
-/* ZONAS TÁCTILES INVISIBLES */
+/* ZONAS TACTILES */
 
 .whatsapp-touch{
 position:absolute;
@@ -118,7 +167,7 @@ z-index:1500;
 .correo-touch{
 position:absolute;
 bottom:10px;
-right:10px;
+right:40px;
 width:260px;
 height:60px;
 z-index:1500;
@@ -137,6 +186,7 @@ z-index:1500;
 
 </div>
 
+
 <div class="menu" id="menu">
 
 <a href="../">Inicio</a>
@@ -151,36 +201,70 @@ z-index:1500;
 
 </div>
 
+
+<div class="titulo">
+Siguatepeque<br>
+<span class="subtitulo">El corazón de Honduras</span>
+</div>
+
+
 <div id="visor">
 
 <img id="revista" src="1.webp">
 
+<div id="indicador">1 / 4</div>
+
+<div id="flecha-izq">&#10094;</div>
+<div id="flecha-der">&#10095;</div>
+
 </div>
 
-<!-- ZONA TÁCTIL WHATSAPP -->
 
 <a class="whatsapp-touch"
-href="https://wa.me/50433661836?text=Hola,%20quisiera%20información%20sobre%20sus%20servicios%20digitales"
-target="_blank">
-</a>
-
-<!-- ZONA TÁCTIL CORREO -->
+href="https://wa.me/50433661836?text=Hola,%20quisiera%20información"
+target="_blank"></a>
 
 <a class="correo-touch"
-href="mailto:aceezdigitar@gmail.com">
-</a>
+href="mailto:aceezdigitar@gmail.com"></a>
 
-<div class="footer">
 
-Portal digital de Siguatepeque
+<div class="footer"></div>
 
-</div>
 
 <script>
+
+/* MENU */
 
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
 }
+
+/* PAGINAS */
+
+const paginas=["1.webp","2.webp","3.webp","4.webp"];
+
+let paginaActual=0;
+
+function mostrar(){
+document.getElementById("revista").src=paginas[paginaActual];
+document.getElementById("indicador").innerText=(paginaActual+1)+" / "+paginas.length;
+}
+
+document.getElementById("flecha-der").onclick=()=>{
+if(paginaActual<paginas.length-1){
+paginaActual++;
+mostrar();
+}
+};
+
+document.getElementById("flecha-izq").onclick=()=>{
+if(paginaActual>0){
+paginaActual--;
+mostrar();
+}
+};
+
+mostrar();
 
 </script>
 
