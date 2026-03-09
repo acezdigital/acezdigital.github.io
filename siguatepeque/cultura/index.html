@@ -20,28 +20,20 @@ background:url("../Fondoweb.webp") center center / cover no-repeat fixed;
 overflow:hidden;
 }
 
-
-/* HEADER */
-
-.header{
-position:fixed;
-top:0;
-width:100%;
-height:60px;
-background:#2f2f2f;
-display:flex;
-align-items:center;
-padding-left:15px;
-border-bottom:2px solid yellow;
-z-index:1000;
-}
+/* BOTON MENU FLOTANTE */
 
 .menu-btn{
-font-size:24px;
+position:absolute;
+top:120px;
+left:15px;
+font-size:26px;
 color:white;
 cursor:pointer;
+z-index:2000;
+background:rgba(0,0,0,0.4);
+padding:8px 12px;
+border-radius:8px;
 }
-
 
 /* MENU */
 
@@ -73,13 +65,12 @@ background:#1f2937;
 left:0;
 }
 
-
 /* VISOR */
 
 #visor{
 position:absolute;
-top:140px;       /* debajo del logo de siguatepeque */
-bottom:90px;     /* arriba del correo */
+top:140px;
+bottom:90px;
 left:0;
 right:0;
 display:flex;
@@ -95,7 +86,6 @@ border-radius:12px;
 pointer-events:none;
 }
 
-
 /* INDICADOR */
 
 #indicador{
@@ -109,7 +99,6 @@ padding:4px 10px;
 border-radius:10px;
 font-size:13px;
 }
-
 
 /* FLECHAS */
 
@@ -127,7 +116,6 @@ cursor:pointer;
 
 #flecha-izq{ left:10px; }
 #flecha-der{ right:10px; }
-
 
 /* ZONAS TACTILES */
 
@@ -154,14 +142,7 @@ height:70px;
 
 <body>
 
-
-<div class="header">
-
-<span class="menu-btn" onclick="toggleMenu()">☰</span>
-
-</div>
-
-
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="menu" id="menu">
 
@@ -178,7 +159,6 @@ height:70px;
 </div>
 
 
-
 <div id="visor">
 
 <img id="revista" src="1.webp">
@@ -191,22 +171,40 @@ height:70px;
 </div>
 
 
-
 <a class="whatsapp-touch"
 href="https://wa.me/50433661836?text=Hola,%20quisiera%20información"
 target="_blank"></a>
-
 
 <a class="correo-touch"
 href="mailto:aceezdigitar@gmail.com"></a>
 
 
-
 <script>
+
+/* MENU */
 
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
 }
+
+/* cerrar menu tocando fuera */
+
+document.addEventListener("click", function(event){
+
+const menu = document.getElementById("menu");
+const boton = document.querySelector(".menu-btn");
+
+if(
+menu.classList.contains("active") &&
+!menu.contains(event.target) &&
+!boton.contains(event.target)
+){
+menu.classList.remove("active");
+}
+
+});
+
+/* PAGINAS */
 
 const paginas=["1.webp","2.webp","3.webp","4.webp"];
 
@@ -216,6 +214,8 @@ function mostrar(){
 document.getElementById("revista").src=paginas[paginaActual];
 document.getElementById("indicador").innerText=(paginaActual+1)+" / "+paginas.length;
 }
+
+/* FLECHAS */
 
 document.getElementById("flecha-der").onclick=()=>{
 if(paginaActual<paginas.length-1){
@@ -230,6 +230,37 @@ paginaActual--;
 mostrar();
 }
 };
+
+/* SWIPE */
+
+let startX=0;
+
+const visor=document.getElementById("visor");
+
+visor.addEventListener("touchstart",(e)=>{
+startX=e.touches[0].clientX;
+});
+
+visor.addEventListener("touchend",(e)=>{
+
+let endX=e.changedTouches[0].clientX;
+let diff=startX-endX;
+
+if(diff>40){
+if(paginaActual<paginas.length-1){
+paginaActual++;
+mostrar();
+}
+}
+
+if(diff<-40){
+if(paginaActual>0){
+paginaActual--;
+mostrar();
+}
+}
+
+});
 
 mostrar();
 
