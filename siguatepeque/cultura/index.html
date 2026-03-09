@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Siguatepeque</title>
 
 <style>
 
-html, body{
-height:100%;
+/* GENERAL */
+
+html,body{
 margin:0;
+height:100%;
 font-family:Arial, Helvetica, sans-serif;
 background:url("../Fondoweb.webp") center center / cover no-repeat fixed;
 overflow:hidden;
 }
+
 
 /* HEADER */
 
@@ -21,17 +27,13 @@ overflow:hidden;
 position:fixed;
 top:0;
 width:100%;
+height:60px;
 background:#2f2f2f;
-padding:12px 18px;
 display:flex;
-justify-content:space-between;
 align-items:center;
+padding-left:15px;
 border-bottom:2px solid yellow;
 z-index:1000;
-}
-
-.logo{
-height:40px;
 }
 
 .menu-btn{
@@ -39,6 +41,7 @@ font-size:24px;
 color:white;
 cursor:pointer;
 }
+
 
 /* MENU */
 
@@ -70,35 +73,18 @@ background:#1f2937;
 left:0;
 }
 
-/* TITULO */
-
-.titulo{
-position:absolute;
-top:80px;
-width:100%;
-text-align:center;
-color:white;
-font-size:26px;
-font-weight:bold;
-text-shadow:0 0 10px black;
-}
-
-.subtitulo{
-font-size:14px;
-color:#cbd5e1;
-}
 
 /* VISOR */
 
 #visor{
 position:absolute;
-top:140px;
-bottom:80px;
+top:140px;       /* debajo del logo de siguatepeque */
+bottom:90px;     /* arriba del correo */
 left:0;
 right:0;
 display:flex;
 justify-content:center;
-align-items:flex-start;
+align-items:center;
 touch-action:pan-x;
 }
 
@@ -106,10 +92,9 @@ touch-action:pan-x;
 width:96%;
 max-width:460px;
 border-radius:12px;
-user-select:none;
--webkit-user-drag:none;
 pointer-events:none;
 }
+
 
 /* INDICADOR */
 
@@ -119,15 +104,16 @@ bottom:10px;
 left:50%;
 transform:translateX(-50%);
 background:rgba(0,0,0,0.6);
-color:#fff;
+color:white;
 padding:4px 10px;
 border-radius:10px;
 font-size:13px;
 }
 
+
 /* FLECHAS */
 
-#flecha-izq, #flecha-der{
+#flecha-izq,#flecha-der{
 position:absolute;
 top:50%;
 transform:translateY(-50%);
@@ -142,49 +128,39 @@ cursor:pointer;
 #flecha-izq{ left:10px; }
 #flecha-der{ right:10px; }
 
-/* FOOTER */
-
-.footer{
-position:fixed;
-bottom:0;
-width:100%;
-height:70px;
-background:#2f2f2f;
-border-top:2px solid yellow;
-}
 
 /* ZONAS TACTILES */
 
 .whatsapp-touch{
 position:absolute;
-top:10px;
-right:10px;
-width:160px;
-height:60px;
-z-index:1500;
+top:0;
+right:0;
+width:180px;
+height:70px;
 }
 
 .correo-touch{
 position:absolute;
-bottom:10px;
-right:40px;
+bottom:0;
+right:30px;
 width:260px;
-height:60px;
-z-index:1500;
+height:70px;
 }
 
 </style>
+
 </head>
 
+
 <body>
+
 
 <div class="header">
 
 <span class="menu-btn" onclick="toggleMenu()">☰</span>
 
-<img src="../ACEZdigital.png" class="logo">
-
 </div>
+
 
 
 <div class="menu" id="menu">
@@ -202,11 +178,6 @@ z-index:1500;
 </div>
 
 
-<div class="titulo">
-Siguatepeque<br>
-<span class="subtitulo">El corazón de Honduras</span>
-</div>
-
 
 <div id="visor">
 
@@ -220,26 +191,22 @@ Siguatepeque<br>
 </div>
 
 
+
 <a class="whatsapp-touch"
 href="https://wa.me/50433661836?text=Hola,%20quisiera%20información"
 target="_blank"></a>
+
 
 <a class="correo-touch"
 href="mailto:aceezdigitar@gmail.com"></a>
 
 
-<div class="footer"></div>
-
 
 <script>
-
-/* MENU */
 
 function toggleMenu(){
 document.getElementById("menu").classList.toggle("active");
 }
-
-/* PAGINAS */
 
 const paginas=["1.webp","2.webp","3.webp","4.webp"];
 
