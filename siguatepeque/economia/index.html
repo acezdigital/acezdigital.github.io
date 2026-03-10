@@ -1,5 +1,13 @@
-<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Siguatepeque</title><style>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siguatepeque</title>
+
+<style>
 
 /* GENERAL */
 
@@ -35,7 +43,7 @@ top:0;
 left:-150px;
 width:150px;
 height:100%;
-background:rgba(17,24,39,0.85); /* transparencia elegante */
+background:rgba(17,24,39,0.85);
 backdrop-filter:blur(6px);
 transition:left .35s ease;
 padding-top:60px;
@@ -43,7 +51,7 @@ z-index:1500;
 box-shadow:4px 0 14px rgba(0,0,0,0.5);
 }
 
-/* ENLACES DEL MENU */
+/* ENLACES MENU */
 
 .menu a{
 display:block;
@@ -65,7 +73,7 @@ background:rgba(255,255,255,0.08);
 left:0;
 }
 
-/* OVERLAY OSCURO */
+/* OVERLAY */
 
 .overlay{
 position:fixed;
@@ -85,16 +93,11 @@ opacity:1;
 pointer-events:auto;
 }
 
-.overlay.active{
-opacity:1;
-pointer-events:auto;
-}
-
 /* VISOR */
 
 #visor{
 position:absolute;
-top:90px;
+top:120px;
 bottom:90px;
 left:0;
 right:0;
@@ -116,11 +119,11 @@ user-select:none;
 transition:opacity .25s ease;
 }
 
-/* INDICADOR */
+/* INDICADOR (numeración) */
 
 #indicador{
 position:absolute;
-bottom:12px;
+bottom:25px;
 left:50%;
 transform:translateX(-50%);
 background:rgba(0,0,0,0.55);
@@ -135,47 +138,41 @@ letter-spacing:1px;
 
 #flecha-izq,#flecha-der{
 position:absolute;
-top:50%;
-transform:translateY(-50%);
-font-size:32px;
+top:60px;
+font-size:34px;
 color:yellow;
-background:rgba(0,0,0,0.35);
-padding:16px 20px;
-border-radius:50%;
+background:transparent;
+padding:6px;
+border-radius:0;
 cursor:pointer;
 user-select:none;
 transition:.2s;
-backdrop-filter:blur(4px);
 }
 
-#flecha-izq:hover,#flecha-der:hover{
-background:rgba(0,0,0,0.6);
-}
+#flecha-izq{ left:12px; }
+#flecha-der{ right:12px; }
 
-#flecha-izq{ left:10px; }
-#flecha-der{ right:10px; }
-
-/* ZONAS TACTILES */
+/* ZONA TACTIL WHATSAPP */
 
 .whatsapp-touch{
 position:absolute;
-top:0;
-right:0;
-width:180px;
-height:70px;
+bottom:0;
+left:0;
+width:100%;
+height:80px;
 z-index:2100;
 }
 
-.verweb-touch{
-position:absolute;
-bottom:0;
-right:30px;
-width:260px;
-height:70px;
-z-index:1600;
-}
+</style>
+</head>
 
-</style></head><body><div class="menu-btn" onclick="toggleMenu()">☰</div><div class="menu" id="menu"><a href="../">Inicio</a>
+<body>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<div class="menu" id="menu">
+
+<a href="../">Inicio</a>
 <a href="../historia/">Historia</a>
 <a href="../geografia/">Geografía</a>
 <a href="../economia/">Economía</a>
@@ -185,15 +182,28 @@ z-index:1600;
 <a href="../galeria/">Galería</a>
 <a href="../informacion/">Información</a>
 
-</div><div id="overlay" class="overlay"></div><div id="visor"><img id="revista" src="1.webp"><div id="indicador">1 / 4</div><div id="flecha-izq">&#10094;</div>
-<div id="flecha-der">&#10095;</div></div><a class="whatsapp-touch"
-href="https://wa.me/50433661836?text=Hola,%20estoy%20visitando%20el%20Portal%20Digital%20de%20Siguatepeque%20y%20me%20gustaría%20obtener%20más%20información."
+</div>
+
+<div id="overlay" class="overlay"></div>
+
+<div id="visor">
+
+<img id="revista" src="1.webp">
+
+<div id="indicador">1 / 4</div>
+
+<div id="flecha-izq">&#10094;</div>
+<div id="flecha-der">&#10095;</div>
+
+</div>
+
+
+<!-- ZONA TACTIL WHATSAPP -->
+
+<a class="whatsapp-touch"
+href="https://wa.me/50433661836?text=Quiero%20más%20información%20acerca%20de%20sus%20servicios%20digitales."
 target="_blank"></a>
 
-<a class="verweb-touch"
-href="https://acezdigital.com"
-target="_blank"
-title="Ver Web"></a>
 
 <script>
 
@@ -206,7 +216,7 @@ document.getElementById("overlay").classList.toggle("active");
 
 }
 
-/* cerrar menu tocando fuera */
+/* CERRAR MENU */
 
 document.addEventListener("click", function(event){
 
@@ -227,7 +237,7 @@ overlay.classList.remove("active");
 
 /* PAGINAS */
 
-const paginas=["1.webp","2.webp","3.webp","4.webp"];
+const paginas=["1.png","2.webp","3.webp","4.webp"];
 
 let paginaActual=0;
 
@@ -256,7 +266,6 @@ document.getElementById("flecha-der").onclick=()=>{
 if(paginaActual<paginas.length-1){
 
 paginaActual++;
-
 mostrar();
 
 }
@@ -268,7 +277,6 @@ document.getElementById("flecha-izq").onclick=()=>{
 if(paginaActual>0){
 
 paginaActual--;
-
 mostrar();
 
 }
@@ -282,25 +290,19 @@ let startX=0;
 const visor=document.getElementById("visor");
 
 visor.addEventListener("touchstart",(e)=>{
-
 startX=e.touches[0].clientX;
-
 });
 
 visor.addEventListener("touchend",(e)=>{
 
 let endX=e.changedTouches[0].clientX;
-
 let diff=startX-endX;
 
 if(diff>60){
 
 if(paginaActual<paginas.length-1){
-
 paginaActual++;
-
 mostrar();
-
 }
 
 }
@@ -308,12 +310,20 @@ mostrar();
 if(diff<-60){
 
 if(paginaActual>0){
-
 paginaActual--;
+mostrar();
+}
+
+}
+
+});
 
 mostrar();
 
-}
+</script>
+
+</body>
+</html>
 
 }
 
