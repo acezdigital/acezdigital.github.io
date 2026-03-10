@@ -21,10 +21,10 @@ font-size:26px;
 color:white;
 cursor:pointer;
 z-index:2000;
-background:rgba(0,0,0,0.45);
+background:rgba(0,0,0,0.40);
 padding:8px 12px;
 border-radius:8px;
-backdrop-filter:blur(4px);
+backdrop-filter:blur(6px);
 }
 
 /* MENU */
@@ -32,40 +32,40 @@ backdrop-filter:blur(4px);
 .menu{
 position:fixed;
 top:0;
-left:-160px;
-width:160px;
+left:-150px;
+width:150px;
 height:100%;
-background:#111827;
+background:rgba(17,24,39,0.85); /* transparencia elegante */
+backdrop-filter:blur(6px);
 transition:left .35s ease;
 padding-top:60px;
 z-index:1500;
-box-shadow:4px 0 14px rgba(0,0,0,0.6);
+box-shadow:4px 0 14px rgba(0,0,0,0.5);
 }
-background:#111827;
-transition:left .35s ease;
-padding-top:60px;
-z-index:1500;
-box-shadow:4px 0 14px rgba(0,0,0,0.6);
-}
+
+/* ENLACES DEL MENU */
 
 .menu a{
 display:block;
 color:white;
-padding:12px 12px;
+padding:12px 14px;
 text-decoration:none;
-border-bottom:1px solid rgba(255,255,255,0.1);
-font-size:14px;
+border-bottom:1px solid rgba(255,255,255,0.08);
+font-size:15px;
+letter-spacing:0.3px;
 }
 
 .menu a:hover{
-background:#1f2937;
+background:rgba(255,255,255,0.08);
 }
+
+/* MENU ACTIVO */
 
 .menu.active{
 left:0;
 }
 
-/* FONDO OSCURO CUANDO MENU ESTA ABIERTO */
+/* OVERLAY OSCURO */
 
 .overlay{
 position:fixed;
@@ -78,6 +78,11 @@ opacity:0;
 pointer-events:none;
 transition:.3s;
 z-index:1400;
+}
+
+.overlay.active{
+opacity:1;
+pointer-events:auto;
 }
 
 .overlay.active{
