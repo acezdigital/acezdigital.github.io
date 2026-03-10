@@ -20,19 +20,20 @@ background:url("../Fondoweb.webp") center center / cover no-repeat fixed;
 overflow:hidden;
 }
 
-/* BOTON MENU FLOTANTE */
+/* BOTON MENU */
 
 .menu-btn{
-position:absolute;
-top:120px;
+position:fixed;
+top:20px;
 left:15px;
 font-size:26px;
 color:white;
 cursor:pointer;
 z-index:2000;
-background:rgba(0,0,0,0.4);
+background:rgba(0,0,0,0.45);
 padding:8px 12px;
 border-radius:8px;
+backdrop-filter:blur(4px);
 }
 
 /* MENU */
@@ -46,7 +47,7 @@ height:100%;
 background:#111827;
 transition:0.3s;
 padding-top:60px;
-z-index:1200;
+z-index:1500;
 }
 
 .menu a{
@@ -69,7 +70,7 @@ left:0;
 
 #visor{
 position:absolute;
-top:140px;
+top:90px;
 bottom:90px;
 left:0;
 right:0;
@@ -79,25 +80,30 @@ align-items:center;
 touch-action:pan-x;
 }
 
+/* IMAGEN */
+
 #revista{
 width:96%;
 max-width:460px;
 border-radius:12px;
 pointer-events:none;
+user-select:none;
+-webkit-user-drag:none;
 }
 
 /* INDICADOR */
 
 #indicador{
 position:absolute;
-bottom:10px;
+bottom:12px;
 left:50%;
 transform:translateX(-50%);
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.55);
 color:white;
-padding:4px 10px;
-border-radius:10px;
+padding:5px 12px;
+border-radius:12px;
 font-size:13px;
+letter-spacing:1px;
 }
 
 /* FLECHAS */
@@ -106,12 +112,13 @@ font-size:13px;
 position:absolute;
 top:50%;
 transform:translateY(-50%);
-font-size:30px;
+font-size:32px;
 color:yellow;
-background:rgba(0,0,0,0.4);
-padding:8px 12px;
+background:rgba(0,0,0,0.45);
+padding:14px 18px;
 border-radius:50%;
 cursor:pointer;
+user-select:none;
 }
 
 #flecha-izq{ left:10px; }
@@ -125,6 +132,7 @@ top:0;
 right:0;
 width:180px;
 height:70px;
+z-index:2100;
 }
 
 .verweb-touch{
@@ -133,7 +141,7 @@ bottom:0;
 right:30px;
 width:260px;
 height:70px;
-z-index:1500;
+z-index:1600;
 }
 
 </style>
@@ -214,24 +222,37 @@ const paginas=["1.webp","2.webp","3.webp","4.webp"];
 let paginaActual=0;
 
 function mostrar(){
+
 document.getElementById("revista").src=paginas[paginaActual];
+
 document.getElementById("indicador").innerText=(paginaActual+1)+" / "+paginas.length;
+
 }
 
 /* FLECHAS */
 
 document.getElementById("flecha-der").onclick=()=>{
+
 if(paginaActual<paginas.length-1){
+
 paginaActual++;
+
 mostrar();
+
 }
+
 };
 
 document.getElementById("flecha-izq").onclick=()=>{
+
 if(paginaActual>0){
+
 paginaActual--;
+
 mostrar();
+
 }
+
 };
 
 /* SWIPE */
@@ -241,26 +262,39 @@ let startX=0;
 const visor=document.getElementById("visor");
 
 visor.addEventListener("touchstart",(e)=>{
+
 startX=e.touches[0].clientX;
+
 });
 
 visor.addEventListener("touchend",(e)=>{
 
 let endX=e.changedTouches[0].clientX;
+
 let diff=startX-endX;
 
-if(diff>40){
+if(diff>60){
+
 if(paginaActual<paginas.length-1){
+
 paginaActual++;
+
 mostrar();
-}
+
 }
 
-if(diff<-40){
-if(paginaActual>0){
-paginaActual--;
-mostrar();
 }
+
+if(diff<-60){
+
+if(paginaActual>0){
+
+paginaActual--;
+
+mostrar();
+
+}
+
 }
 
 });
