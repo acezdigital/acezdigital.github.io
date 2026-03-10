@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Siguatepeque</title><style>
 
-<title>Siguatepeque</title>
-
-<style>
+/* GENERAL */
 
 html,body{
 margin:0;
@@ -16,66 +11,44 @@ background:url("../Fondoweb.webp") center center / cover no-repeat fixed;
 overflow:hidden;
 }
 
-/* HEADER */
+/* BOTON MENU */
 
-.header{
+.menu-btn{
 position:fixed;
-top:0;
-width:100%;
-background:#1f2937;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:10px 15px;
-border-bottom:2px solid #3b82f6;
-z-index:1000;
-}
-
-.logo{
-height:40px;
-}
-
-.whatsapp{
-background:#25D366;
+top:20px;
+left:15px;
+font-size:26px;
 color:white;
-padding:8px 16px;
-border-radius:20px;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-}
-
-.whatsapp:hover{
-transform:scale(1.05);
-box-shadow:0 0 10px rgba(0,0,0,0.5);
+cursor:pointer;
+z-index:2000;
+background:rgba(0,0,0,0.45);
+padding:8px 12px;
+border-radius:8px;
+backdrop-filter:blur(4px);
 }
 
 /* MENU */
 
-.menu-btn{
-font-size:24px;
-color:white;
-cursor:pointer;
-}
-
 .menu{
 position:fixed;
 top:0;
-left:-260px;
-width:260px;
+left:-220px;
+width:220px;
 height:100%;
 background:#111827;
-transition:0.3s;
+transition:left .35s ease;
 padding-top:60px;
-z-index:1200;
+z-index:1500;
+box-shadow:4px 0 14px rgba(0,0,0,0.6);
 }
 
 .menu a{
 display:block;
 color:white;
-padding:15px;
+padding:12px 16px;
 text-decoration:none;
 border-bottom:1px solid rgba(255,255,255,0.1);
+font-size:15px;
 }
 
 .menu a:hover{
@@ -86,67 +59,112 @@ background:#1f2937;
 left:0;
 }
 
+/* FONDO OSCURO CUANDO MENU ESTA ABIERTO */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+opacity:0;
+pointer-events:none;
+transition:.3s;
+z-index:1400;
+}
+
+.overlay.active{
+opacity:1;
+pointer-events:auto;
+}
+
 /* VISOR */
 
 #visor{
 position:absolute;
-top:80px;
-bottom:80px;
+top:90px;
+bottom:90px;
 left:0;
 right:0;
 display:flex;
 justify-content:center;
 align-items:center;
+touch-action:pan-x;
 }
+
+/* IMAGEN */
 
 #revista{
-width:92%;
+width:96%;
 max-width:460px;
-border-radius:14px;
-box-shadow:0 0 20px rgba(0,0,0,0.5);
+border-radius:12px;
+pointer-events:none;
+user-select:none;
+-webkit-user-drag:none;
+transition:opacity .25s ease;
 }
 
-/* FOOTER */
+/* INDICADOR */
 
-.footer{
-position:fixed;
-bottom:0;
-width:100%;
-background:#1f2937;
+#indicador{
+position:absolute;
+bottom:12px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,0.55);
 color:white;
-text-align:center;
-padding:10px;
-border-top:2px solid #3b82f6;
+padding:5px 12px;
+border-radius:12px;
+font-size:13px;
+letter-spacing:1px;
 }
 
-.footer a{
-color:#22c55e;
-text-decoration:none;
-font-weight:bold;
+/* FLECHAS */
+
+#flecha-izq,#flecha-der{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:32px;
+color:yellow;
+background:rgba(0,0,0,0.35);
+padding:16px 20px;
+border-radius:50%;
+cursor:pointer;
+user-select:none;
+transition:.2s;
+backdrop-filter:blur(4px);
 }
 
-</style>
-</head>
+#flecha-izq:hover,#flecha-der:hover{
+background:rgba(0,0,0,0.6);
+}
 
-<body>
+#flecha-izq{ left:10px; }
+#flecha-der{ right:10px; }
 
-<div class="header">
+/* ZONAS TACTILES */
 
-<span class="menu-btn" onclick="toggleMenu()">☰</span>
+.whatsapp-touch{
+position:absolute;
+top:0;
+right:0;
+width:180px;
+height:70px;
+z-index:2100;
+}
 
-<img src="../ACEZdigital.png" class="logo">
+.verweb-touch{
+position:absolute;
+bottom:0;
+right:30px;
+width:260px;
+height:70px;
+z-index:1600;
+}
 
-<a class="whatsapp"
-href="https://wa.me/50433661836?text=Hola,%20quisiera%20información%20sobre%20sus%20servicios%20digitales"
-target="_blank">
-WhatsApp
-</a>
-
-</div>
-
-<div class="menu" id="menu">
-
-<a href="../">Inicio</a>
+</style></head><body><div class="menu-btn" onclick="toggleMenu()">☰</div><div class="menu" id="menu"><a href="../">Inicio</a>
 <a href="../historia/">Historia</a>
 <a href="../geografia/">Geografía</a>
 <a href="../economia/">Economía</a>
@@ -156,30 +174,141 @@ WhatsApp
 <a href="../galeria/">Galería</a>
 <a href="../informacion/">Información</a>
 
-</div>
+</div><div id="overlay" class="overlay"></div><div id="visor"><img id="revista" src="1.webp"><div id="indicador">1 / 4</div><div id="flecha-izq">&#10094;</div>
+<div id="flecha-der">&#10095;</div></div><a class="whatsapp-touch"
+href="https://wa.me/50433661836?text=Hola,%20estoy%20visitando%20el%20Portal%20Digital%20de%20Siguatepeque%20y%20me%20gustaría%20obtener%20más%20información."
+target="_blank"></a>
 
-<div id="visor">
-
-<img id="revista" src="1.webp">
-
-</div>
-
-<div class="footer">
-
-Correo electrónico  
-<a href="mailto:acesdigita@gmail.com">
-acesdigita@gmail.com
-</a>
-
-</div>
+<a class="verweb-touch"
+href="https://acezdigital.com"
+target="_blank"
+title="Ver Web"></a>
 
 <script>
 
+/* MENU */
+
 function toggleMenu(){
+
 document.getElementById("menu").classList.toggle("active");
+document.getElementById("overlay").classList.toggle("active");
+
 }
 
-</script>
+/* cerrar menu tocando fuera */
 
-</body>
+document.addEventListener("click", function(event){
+
+const menu = document.getElementById("menu");
+const boton = document.querySelector(".menu-btn");
+const overlay = document.getElementById("overlay");
+
+if(
+menu.classList.contains("active") &&
+!menu.contains(event.target) &&
+!boton.contains(event.target)
+){
+menu.classList.remove("active");
+overlay.classList.remove("active");
+}
+
+});
+
+/* PAGINAS */
+
+const paginas=["1.webp","2.webp","3.webp","4.webp"];
+
+let paginaActual=0;
+
+function mostrar(){
+
+const img=document.getElementById("revista");
+
+img.style.opacity=0;
+
+setTimeout(()=>{
+
+img.src=paginas[paginaActual];
+
+document.getElementById("indicador").innerText=(paginaActual+1)+" / "+paginas.length;
+
+img.style.opacity=1;
+
+},120);
+
+}
+
+/* FLECHAS */
+
+document.getElementById("flecha-der").onclick=()=>{
+
+if(paginaActual<paginas.length-1){
+
+paginaActual++;
+
+mostrar();
+
+}
+
+};
+
+document.getElementById("flecha-izq").onclick=()=>{
+
+if(paginaActual>0){
+
+paginaActual--;
+
+mostrar();
+
+}
+
+};
+
+/* SWIPE */
+
+let startX=0;
+
+const visor=document.getElementById("visor");
+
+visor.addEventListener("touchstart",(e)=>{
+
+startX=e.touches[0].clientX;
+
+});
+
+visor.addEventListener("touchend",(e)=>{
+
+let endX=e.changedTouches[0].clientX;
+
+let diff=startX-endX;
+
+if(diff>60){
+
+if(paginaActual<paginas.length-1){
+
+paginaActual++;
+
+mostrar();
+
+}
+
+}
+
+if(diff<-60){
+
+if(paginaActual>0){
+
+paginaActual--;
+
+mostrar();
+
+}
+
+}
+
+});
+
+mostrar();
+
+</script></body>
 </html>
