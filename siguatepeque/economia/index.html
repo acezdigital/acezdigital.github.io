@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Siguatepeque</title>
-
-<style>
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Siguatepeque</title><style>
 
 /* GENERAL */
 
@@ -30,10 +21,10 @@ font-size:26px;
 color:white;
 cursor:pointer;
 z-index:2000;
-background:rgba(0,0,0,0.45);
+background:rgba(0,0,0,0.40);
 padding:8px 12px;
 border-radius:8px;
-backdrop-filter:blur(4px);
+backdrop-filter:blur(6px);
 }
 
 /* MENU */
@@ -41,29 +32,62 @@ backdrop-filter:blur(4px);
 .menu{
 position:fixed;
 top:0;
-left:-260px;
-width:260px;
+left:-150px;
+width:150px;
 height:100%;
-background:#111827;
-transition:0.3s;
+background:rgba(17,24,39,0.85); /* transparencia elegante */
+backdrop-filter:blur(6px);
+transition:left .35s ease;
 padding-top:60px;
 z-index:1500;
+box-shadow:4px 0 14px rgba(0,0,0,0.5);
 }
+
+/* ENLACES DEL MENU */
 
 .menu a{
 display:block;
 color:white;
-padding:15px;
+padding:12px 18px;
 text-decoration:none;
-border-bottom:1px solid rgba(255,255,255,0.1);
+border-bottom:1px solid rgba(255,255,255,0.08);
+font-size:15px;
+letter-spacing:0.3px;
 }
 
 .menu a:hover{
-background:#1f2937;
+background:rgba(255,255,255,0.08);
 }
+
+/* MENU ACTIVO */
 
 .menu.active{
 left:0;
+}
+
+/* OVERLAY OSCURO */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+opacity:0;
+pointer-events:none;
+transition:.3s;
+z-index:1400;
+}
+
+.overlay.active{
+opacity:1;
+pointer-events:auto;
+}
+
+.overlay.active{
+opacity:1;
+pointer-events:auto;
 }
 
 /* VISOR */
@@ -89,6 +113,7 @@ border-radius:12px;
 pointer-events:none;
 user-select:none;
 -webkit-user-drag:none;
+transition:opacity .25s ease;
 }
 
 /* INDICADOR */
@@ -114,11 +139,17 @@ top:50%;
 transform:translateY(-50%);
 font-size:32px;
 color:yellow;
-background:rgba(0,0,0,0.45);
-padding:14px 18px;
+background:rgba(0,0,0,0.35);
+padding:16px 20px;
 border-radius:50%;
 cursor:pointer;
 user-select:none;
+transition:.2s;
+backdrop-filter:blur(4px);
+}
+
+#flecha-izq:hover,#flecha-der:hover{
+background:rgba(0,0,0,0.6);
 }
 
 #flecha-izq{ left:10px; }
@@ -144,18 +175,7 @@ height:70px;
 z-index:1600;
 }
 
-</style>
-
-</head>
-
-
-<body>
-
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<div class="menu" id="menu">
-
-<a href="../">Inicio</a>
+</style></head><body><div class="menu-btn" onclick="toggleMenu()">☰</div><div class="menu" id="menu"><a href="../">Inicio</a>
 <a href="../historia/">Historia</a>
 <a href="../geografia/">Geografía</a>
 <a href="../economia/">Economía</a>
@@ -165,22 +185,8 @@ z-index:1600;
 <a href="../galeria/">Galería</a>
 <a href="../informacion/">Información</a>
 
-</div>
-
-
-<div id="visor">
-
-<img id="revista" src="1.webp">
-
-<div id="indicador">1 / 4</div>
-
-<div id="flecha-izq">&#10094;</div>
-<div id="flecha-der">&#10095;</div>
-
-</div>
-
-
-<a class="whatsapp-touch"
+</div><div id="overlay" class="overlay"></div><div id="visor"><img id="revista" src="1.webp"><div id="indicador">1 / 4</div><div id="flecha-izq">&#10094;</div>
+<div id="flecha-der">&#10095;</div></div><a class="whatsapp-touch"
 href="https://wa.me/50433661836?text=Hola,%20estoy%20visitando%20el%20Portal%20Digital%20de%20Siguatepeque%20y%20me%20gustaría%20obtener%20más%20información."
 target="_blank"></a>
 
@@ -189,13 +195,15 @@ href="https://acezdigital.com"
 target="_blank"
 title="Ver Web"></a>
 
-
 <script>
 
 /* MENU */
 
 function toggleMenu(){
+
 document.getElementById("menu").classList.toggle("active");
+document.getElementById("overlay").classList.toggle("active");
+
 }
 
 /* cerrar menu tocando fuera */
@@ -204,6 +212,7 @@ document.addEventListener("click", function(event){
 
 const menu = document.getElementById("menu");
 const boton = document.querySelector(".menu-btn");
+const overlay = document.getElementById("overlay");
 
 if(
 menu.classList.contains("active") &&
@@ -211,6 +220,7 @@ menu.classList.contains("active") &&
 !boton.contains(event.target)
 ){
 menu.classList.remove("active");
+overlay.classList.remove("active");
 }
 
 });
@@ -223,9 +233,19 @@ let paginaActual=0;
 
 function mostrar(){
 
-document.getElementById("revista").src=paginas[paginaActual];
+const img=document.getElementById("revista");
+
+img.style.opacity=0;
+
+setTimeout(()=>{
+
+img.src=paginas[paginaActual];
 
 document.getElementById("indicador").innerText=(paginaActual+1)+" / "+paginas.length;
+
+img.style.opacity=1;
+
+},120);
 
 }
 
@@ -301,7 +321,5 @@ mostrar();
 
 mostrar();
 
-</script>
-
-</body>
+</script></body>
 </html>
