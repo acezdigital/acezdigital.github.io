@@ -2,7 +2,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Siguatepeque</title><style>
 
 /* GENERAL */
-
+  
+.whatsapp-servicio{
+position:fixed;
+bottom:18px;
+left:50%;
+transform:translateX(-50%);
+background:#25D366;
+color:white;
+padding:10px 18px;
+border-radius:22px;
+text-decoration:none;
+font-size:14px;
+font-weight:bold;
+box-shadow:0 4px 10px rgba(0,0,0,0.4);
+z-index:3000;
+}
+  
 html,body{
 margin:0;
 height:100%;
@@ -120,7 +136,7 @@ transition:opacity .25s ease;
 
 #indicador{
 position:absolute;
-bottom:12px;
+bottom:35px;
 left:50%;
 transform:translateX(-50%);
 background:rgba(0,0,0,0.55);
@@ -135,13 +151,13 @@ letter-spacing:1px;
 
 #flecha-izq,#flecha-der{
 position:absolute;
-top:80px;
+top:110px;
 transform:translateY(-50%);
 font-size:32px;
 color:yellow;
-background:rgba(0,0,0,0.35);
-padding:16px 20px;
-border-radius:50%;
+background:transparent;
+padding:10px 20px;
+border-radius:0;
 cursor:pointer;
 user-select:none;
 transition:.2s;
@@ -166,14 +182,6 @@ height:70px;
 z-index:2100;
 }
 
-.verweb-touch{
-position:absolute;
-bottom:0;
-right:30px;
-width:260px;
-height:70px;
-z-index:1600;
-}
 
 </style></head><body><div class="menu-btn" onclick="toggleMenu()">☰</div><div class="menu" id="menu"><a href="../">Inicio</a>
 <a href="../historia/">Historia</a>
@@ -186,14 +194,8 @@ z-index:1600;
 <a href="../informacion/">Información</a>
 
 </div><div id="overlay" class="overlay"></div><div id="visor"><img id="revista" src="1.webp"><div id="indicador">1 / 4</div><div id="flecha-izq">&#10094;</div>
-<div id="flecha-der">&#10095;</div></div><a class="whatsapp-touch"
-href="https://wa.me/50433661836?text=Hola,%20estoy%20visitando%20el%20Portal%20Digital%20de%20Siguatepeque%20y%20me%20gustaría%20obtener%20más%20información."
-target="_blank"></a>
+<div id="flecha-der">&#10095;</div></div>
 
-<a class="verweb-touch"
-href="https://acezdigital.com"
-target="_blank"
-title="Ver Web"></a>
 
 <script>
 
@@ -321,5 +323,14 @@ mostrar();
 
 mostrar();
 
-</script></body>
+</script>
+
+<a 
+  href="https://wa.me/50433661836?text=Quiero%20más%20información%20acerca%20de%20sus%20servicios%20digitales."
+class="whatsapp-servicio"
+target="_blank">
+WhatsApp: 3366-1836
+</a>
+  
+</body>
 </html>
